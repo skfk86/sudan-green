@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background: linear-gradient(rgba(10,105,45), rgba(21, 158, 3, 0.918));
+            height: 100vh;
+        }
+        .content{
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100%;
+            flex-direction: column;
+        }
+        .content h2{
+            color: white;
+            margin: 10px auto;
+        }
+        .login1,.login2{
+            padding: 20px 10px;
+            margin: 10px auto;
+            border-radius: 10px;
+            background-color: white;
+            overflow: hidden;
+            width: 80%;     
+        }
+        .login1 input,.login2 input{
+            direction: rtl;
+            display: block;
+            width: 90%;
+            padding: 10px 30px;
+            margin: 10px auto;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 10px;
+            border: 2px solid rgba(10,105,45,0.3);
+        }
+       .login1 #login,.login2 #login{
+            background-color: rgba(10,105,45);
+            color: white;
+            cursor: pointer;
+        }
+        .login1 .more,.login2 .more{
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            color: rgba(10,105,45);
+            margin: 10px auto;
+        }
+        .active{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2 id="title">معاً نحو غد مشرق</h2>
+         <div class="login1" id="login1">
+            <input type="email" placeholder="البريد الاكتروني">
+            <input type="password" placeholder="كلمة المرور">
+            <input type="button" id="login" value="تسجيل">
+            <a href="#" class="more"  onclick="addClass()">ليس لديك جساب؟</a> 
+        </div> 
+        <div class="login2" id="login2">
+            <input type="text" name="" placeholder="الاسم">
+            <input type="email" placeholder="البريد الاكتروني">
+            <input type="password" placeholder="كلمة المرور">
+            <input type="button" id="login" value="ابدا الان" id="start">
+            <a href="#" class="more" id="true" onclick="addClass()">لديك جساب؟</a>
+        </div>
+    </div>
+</body>
+<script>
+function addClass(){
+    let login1 = document.querySelector(".login1")
+    let login2 = document.querySelector(".login2")
+    if(login1.classList.contains("active")){
+        login1.classList.remove("active")
+        login2.classList.add("active")
+    }else{
+        login2.classList.remove("active")
+        login1.classList.add("active")
+    }
+}
+addClass()
+</script>
+</html>

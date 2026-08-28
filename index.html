@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            text-align: center;
+        }
+        main{
+            height: 400px;
+            position: relative;
+            width: 100%;
+            background: url("Screenshot from 2026-08-25 21-32-16.png");
+            margin-bottom: 10px;
+        }
+        main::before{
+            content: "";
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0) 70%, #fff);
+        }
+        section{
+            margin-top: 50px;
+        }
+        section h2 ,p{
+            color: rgba(10, 105, 45);
+            padding: 5px;
+        }
+        section button{
+            display: block;
+            margin: 20px auto;
+            width: 80%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 20px;
+            color: white;
+            font-weight: 600;
+            background-color: rgba(10, 105, 45);
+            cursor: pointer;
+        }
+        section button:hover{
+            color: rgba(10, 105, 45);
+            border: 1px solid rgba(10, 105, 45);
+            background-color: #fff;
+        }
+         section a{
+            display: block;
+            margin-top: 20px;
+            color: rgba(10, 105, 45);
+            font-size: 20px;
+            text-decoration: none;
+         }
+         
+    </style>
+</head>
+<body>
+        <main>
+            <!-- hear image -->
+        </main>
+        <section>
+            <h2>السودان الاخضر</h2>
+            <p>معاً نجعل السودان اكثر خضرة</p>
+            <a href="login.html#login1"><button id="login">تسجيل الدخول</button></a>
+            <a href="login.html#login2"><button id="login">انشاء حساب</button></a>
+            <a href="#">تخطي</a>
+        </section>
+</body>
+<!-- script js -->
+ <script src="script.js">
+ </script>
+</html>
