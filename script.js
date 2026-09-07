@@ -11,3 +11,7 @@ window.addEventListener("click", function (){
         menuList.classList.remove("show")
     }
 })
+let frute = ["apple","apple","apple","apple"]
+for (const [i , p] of frute.entries()) {
+    console.log(p , i)
+}

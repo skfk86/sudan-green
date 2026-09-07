@@ -1,83 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-        body{
-            text-align: center;
-        }
-        main{
-            height: 400px;
-            position: relative;
-            width: 100%;
-            background: url("Screenshot from 2026-08-25 21-32-16.png");
-            margin-bottom: 10px;
-        }
-        main::before{
-            content: "";
-            position: absolute;
-            width: 100%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0) 70%, #fff);
-        }
-        section{
-            margin-top: 50px;
-        }
-        section h2 ,p{
-            color: rgba(10, 105, 45);
-            padding: 5px;
-        }
-        section button{
-            display: block;
-            margin: 20px auto;
-            width: 80%;
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            font-size: 20px;
-            color: white;
-            font-weight: 600;
-            background-color: rgba(10, 105, 45);
-            cursor: pointer;
-        }
-        section button:hover{
-            color: rgba(10, 105, 45);
-            border: 1px solid rgba(10, 105, 45);
-            background-color: #fff;
-        }
-         section a{
-            display: block;
-            margin-top: 20px;
-            color: rgba(10, 105, 45);
-            font-size: 20px;
-            text-decoration: none;
-         }
-         
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;  
+     }
+     .overlay{
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      display: none;
+      background-color: rgba(0, 0, 0, 0.205);
+     }
+     .model{
+      max-width: 450px;
+      padding: 24px 20px;
+      direction: rtl;
+      height: 150px;
+      width: 80%;
+      background-color: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.13);
+      background-color: #fff;
+      margin: auto;
+      border-radius: 10px;
+      position: relative;
+     }
+     .model h1{
+      padding: 20px;
+     }
+     .model p{
+      padding: 20px;
+     }
+     #btn{
+      margin: 10px 20px;
+     }
+     #close{
+      border: none;
+      font-size: large;
+      font-weight: 700;
+      position: absolute;
+      top: 10px;
+      left: 15px;
+     }
+     .overlay.active{
+      display: flex;
+      pointer-events: auto;
+     }
+
+  </style>
 </head>
-<body>
-        <main>
-            <!-- hear image -->
-        </main>
-        <section>
-            <h2>السودان الاخضر</h2>
-            <p>معاً نجعل السودان اكثر خضرة</p>
-            <a href="login.html#login1"><button id="login">تسجيل الدخول</button></a>
-            <a href="login.html#login2"><button id="login">انشاء حساب</button></a>
-            <a href="#">تخطي</a>
-        </section>
-</body>
-<!-- script js -->
- <script src="script.js">
- </script>
+  <body>
+    <button id="btn">افتح النافذة</button>
+    <div class="overlay" id="overlay">
+      <div class="model">
+        <h2>عنوان النافذة</h2>
+        <p>نص النافذة</p>
+        <button id="close">d</button>
+      </div>
+    </div>
+  </body>
+<script>
+  const btn = document.getElementById("btn")
+  const overlay = document.getElementById("overlay")
+  const close = document.getElementById("close")
+  btn.addEventListener("click", ()=> overlay.classList.add("active"))
+  let closeBtn = ()=> overlay.classList.remove("active")
+  close.addEventListener("click", ()=> closeBtn())
+  overlay.addEventListener("click", (e)=>{
+    if(e.target === overlay) closeBtn()
+  })
+</script>
 </html>

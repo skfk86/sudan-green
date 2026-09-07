@@ -4,105 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
+    <!-- link style -->
+     <style>
         *{
-            padding: 0;
             margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
-        header{
+        nav{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            background-color: antiquewhite;
-
+            width: 95%;
+            margin: auto;
         }
-        .navbar{
+        nav ul{
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap:25px;
             list-style: none;
-        }
-        .navbar li a{
-            text-decoration: none;
             font-size: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        nav ul li a{
+            text-decoration: none;
             color: black;
         }
-           .navbar li a:hover{
-            color: rgba(0, 0, 0, 0.705);
-           }
-           .sidebar{
+        .sidebar{
             position: fixed;
             top: 0;
             right: 0;
-            height:100vh ;
+            height: 100vh;
             width: 250px;
-            padding: 10px 20px;
-            background-color: rgba(238, 130, 238, 0.404);
-            display: none;
-            align-items: center;
+            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace;
             list-style: none;
             flex-direction: column;
-           }
-           .sidebar li{
+            z-index: 999;
+            padding: 20px 10px;
+            background-color: burlywood;
+            display: none;
+
+        }
+        .sidebar .item{
             height: 50px;
-            padding: 10px;
             width: 100%;
             border-radius: 6px;
-           }
-           .sidebar li a{
             display: flex;
             align-items: center;
-            width: 100%;
-            height: 100%;
+            margin: 10px 0;
+        }
+        .sidebar .item:hover{
+            background-color: #fff;
+        }
+        .sidebar li a{
             text-decoration: none;
-            font-size: 20px;
-            font-family: 'Times New Roman', Times, serif;
             color: black;
-           }
-           .item:hover{
-            background-color: aliceblue;
-           }
-           
 
-    </style>
+        }
+        .show{
+            display: block;
+        }
+        .hidden{
+            display: none;
+        }
+
+        #menuBtn{
+            display: none;
+        }
+        @media (max-width: 600px) {
+            #menuBtn{
+                display: block;
+            }
+            .navbar li{
+                display: none;
+            }
+        }
+
+
+     </style>
 </head>
 <body>
-    <header>
-        <h1 class="logo">My webside</h1>
+    <nav>
+        <h1 class="logo">Navbr</h1>
         <ul class="navbar">
-        <li><a href="#">home</a></li>
-        <li><a href="#">about</a></li>
-        <li><a href="#">conact</a></li>
-        <li><a href="#">servecis</a></li>
-        <li id="menuBtn"><a href="#"><i class="fa-solid fa-bars"></i></a></li>
-    </ul>
-    </header>
+            <li><a href="#">home</a></li>
+            <li><a href="#"> home</a></li>
+            <li><a href="#">home</a></li>
+            <li><a href="#">home</a></li>
+            <li id="menuBtn"><a href="#"><i class="fa-solid fa-bars"></i></a></li>
+        </ul>
+    </nav>
+    <ul class="sidebar">
+        <li  id="close"><a href="#"><i class="fa-solid fa-xmark"></i></a></li>
+            <li class="item"><a href="#">home</a></li>
+            <li class="item"><a href="#"> home</a></li>
+            <li class="item"><a href="#">home</a></li>
+            <li class="item"><a href="#">home</a></li>
+        </ul>
 
-     <ul class="sidebar" id="sidebar">
-        <li id="close"><a href="#"><i class="fa-solid fa-xmark"></i></a></li>
-        <li class="item"><a href="#">home</a></li>
-        <li class="item"><a href="#">about</a></li>
-        <li class="item"><a href="#">conact</a></li>
-        <li class="item"><a href="#">servecis</a></li>
-    </ul>
-    
+
 </body>
 <script>
-    function closeMenu(id , elm){
-       return document.getElementById(id).style.display = elm
-    }
-    const menuBtn = document.getElementById("menuBtn")
-    menuBtn.addEventListener("click", () =>{
-        closeMenu("sidebar" , "flex")
+    const btn = document.getElementById("menuBtn")
+    btn.addEventListener("click", ()=>{
+       let menu = document.querySelector(".sidebar").classList.add("show")
+       document.querySelector(".sidebar").classList.remove("hidden")
     })
-    let close = document.getElementById("close").addEventListener("click",()=>{
-         closeMenu("sidebar" , "none")
+    const close = document.getElementById("close").addEventListener("click", ()=>{
+        document.querySelector(".sidebar").classList.add("hidden")
+        document.querySelector(".sidebar").classList.remove("show")
     })
-
-
 </script>
 </html>

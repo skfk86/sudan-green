@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--  style css -->
+      <style>
+        *{
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+        }
+        body{
+          background-color: grey;
+        }
+        .content{
+          position: absolute;
+          bottom: 20px;
+          right: 0;
+          left: 0;
+        }
+        .content .screen{
+          padding: 10px 20px;
+          background-color: black;
+          font-size: 30px;
+          height: 60px;
+          width: 100%;
+          max-width: 500px;
+          margin: auto;
+          color: azure;
+        }
+        .inputs{
+          display: grid;
+          grid-template-columns: repeat(4 , 1fr);
+          width: 100%;
+          max-width: 500px;
+          margin: auto;
+          background-color: black;
+          padding: 10px 15px;
+
+        }
+        .inputs input{
+          padding: 15px 0;
+          border: none;
+          margin: 5px;
+          font-size: 20px;
+          font-weight: 800;
+          background-color: rgb(24, 21, 21);
+          color: azure;
+          border-radius: 6px;
+
+        }
+      </style>
+</head>
+<body>
+    <div class="content">
+        <div class="screen">
+          
+        </div>
+        <div class="inputs">
+        <input type="button" value="C" onclick="clearScreen()">
+        <input type="button" value="/" onclick="SellectOpratore(this.value)">
+        <input type="button" value="+" onclick="SellectOpratore(this.value)">
+        <input type="button" value="*" onclick="SellectOpratore(this.value)">
+        <input type="button" value="1" onclick="sellectNumper(this.value)">
+        <input type="button" value="2" onclick="sellectNumper(this.value)">
+        <input type="button" value="3" onclick="sellectNumper(this.value)">
+        <input type="button" value="4" onclick="sellectNumper(this.value)">
+        <input type="button" value="5" onclick="sellectNumper(this.value)">
+        <input type="button" value="6" onclick="sellectNumper(this.value)">
+        <input type="button" value="7" onclick="sellectNumper(this.value)">
+        <input type="button" value="8" onclick="sellectNumper(this.value)">
+        <input type="button" value="9" onclick="sellectNumper(this.value)">
+        <input type="button" value="0" onclick="sellectNumper(this.value)">
+        <input type="button" value="." onclick="sellectNumper(this.value)">
+        <input type="button" value="=" onclick="calc()">
+        </div>
+      </div>
+    </div>
+</body>
+<script>
+ let num1 = ""
+ let num2 = ""
+ let opration = ""
+const screen = document.querySelector(".screen")
+ function sellectNumper(num){
+  if(opration == ""){
+    num1 += num
+  }else{
+    num2 += num
+  }
+  screen.innerHTML = `${num1} ${opration} ${num2}`
+ }
+
+ function SellectOpratore(op){
+  opration = op
+  screen.innerHTML = `${num1} ${opration} ${num2}`
+ }
+
+ function calc(){
+  if (opration === "+") {
+    screen.innerHTML = Number(num1) + Number(num2)
+    clear()
+  }
+  if (opration === "/") {
+    screen.innerHTML = Number(num1) / Number(num2)
+    clear()
+  }
+  if (opration === "*") {
+    screen.innerHTML = Number(num1) * Number(num2)
+    clear()
+  }
+  if (opration === "-") {
+    screen.innerHTML = Number(num1) - Number(num2)
+    clear()
+  }
+ }
+
+ function clear(){
+  num1 = ""
+  num2 = ""
+  opration = ""
+ }
+ function clearScreen(){
+  screen.innerHTML = ""
+  clear()
+ }
+</script>
+</html>
