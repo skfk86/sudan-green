@@ -1,88 +1,74 @@
-
 <svg viewBox="0 0 500 450" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- تدرجات الألوان المطابقة لموقعك -->
-    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- تدرجات الألوان المتناسقة مع الموقع -->
+    <linearGradient id="contactBlue" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#394bee" />
-      <stop offset="100%" stop-color="#2434b8" />
+      <stop offset="100%" stop-color="#1e2ea8" />
     </linearGradient>
-    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="contactGreen" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#38cf9d" />
       <stop offset="100%" stop-color="#1ea87a" />
     </linearGradient>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-opacity="0.12" />
+    <filter id="softShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#111111" flood-opacity="0.08" />
     </filter>
   </defs>
 
   <!-- هالة خلفية ناعمة -->
-  <circle cx="250" cy="225" r="170" fill="#eef2ff" />
-  <circle cx="370" cy="110" r="30" fill="#e6faf3" />
+  <circle cx="250" cy="225" r="165" fill="#f0f4ff" />
+  <circle cx="100" cy="120" r="35" fill="#e8fbf4" />
 
-  <!-- لابتوب المطور -->
-  <g filter="url(#shadow)">
-    <!-- شاشة اللابتوب -->
-    <rect x="75" y="110" width="270" height="175" rx="12" fill="#1e243b" />
-    <rect x="85" y="120" width="250" height="155" rx="8" fill="#121624" />
+  <!-- خطوط مسار انطلاق الطائرة (Dash Lines) -->
+  <path d="M120,310 C180,310 180,180 320,150" fill="none" stroke="#38cf9d" stroke-width="2.5" stroke-dasharray="6,6" opacity="0.8" />
+
+  <!-- صندوق المظروف الأساسي (Mail Card) -->
+  <g filter="url(#softShadow)">
+    <rect x="110" y="190" width="240" height="150" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" />
     
-    <!-- شريط نافذة الكود والأزرار -->
-    <rect x="85" y="120" width="250" height="22" rx="6" fill="#1e243b" />
-    <circle cx="98" cy="131" r="3.5" fill="#ff5f56" />
-    <circle cx="110" cy="131" r="3.5" fill="#ffbd2e" />
-    <circle cx="122" cy="131" r="3.5" fill="#27c93f" />
+    <!-- طيات المظروف الخلفية والداخلية -->
+    <path d="M110,195 L230,285 L350,195" fill="none" stroke="#394bee" stroke-width="2" opacity="0.2" />
+    <path d="M110,340 L195,260" stroke="#cbd5e1" stroke-width="1.5" />
+    <path d="M350,340 L265,260" stroke="#cbd5e1" stroke-width="1.5" />
 
-    <!-- أسطر برمجية منسقة بالألوان -->
-    <rect x="100" y="155" width="45" height="7" rx="3" fill="#38cf9d" />
-    <rect x="152" y="155" width="60" height="7" rx="3" fill="#394bee" />
-    <rect x="115" y="172" width="80" height="6" rx="3" fill="#64748b" />
-    <rect x="115" y="187" width="50" height="6" rx="3" fill="#ffbd2e" />
-    <rect x="170" y="187" width="75" height="6" rx="3" fill="#38cf9d" />
-    <rect x="115" y="202" width="105" height="6" rx="3" fill="#64748b" />
-    <rect x="100" y="219" width="35" height="7" rx="3" fill="#394bee" />
+    <!-- ورقة الرسالة الخارجة من المظروف -->
+    <rect x="140" y="140" width="180" height="100" rx="10" fill="#ffffff" filter="url(#softShadow)" />
+    <!-- أسطر كتابة الرسالة -->
+    <rect x="160" y="162" width="70" height="7" rx="3.5" fill="#394bee" />
+    <rect x="160" y="180" width="140" height="5" rx="2.5" fill="#94a3b8" />
+    <rect x="160" y="195" width="110" height="5" rx="2.5" fill="#cbd5e1" />
+    <rect x="160" y="210" width="80" height="5" rx="2.5" fill="#38cf9d" />
 
-    <!-- قاعدة اللابتوب ولوحة المفاتيح -->
-    <path d="M45,285 L375,285 L360,298 L60,298 Z" fill="#b0b8c9" />
-    <rect x="180" y="285" width="60" height="5" rx="2" fill="#7d889b" />
+    <!-- ختم دائري على المظروف -->
+    <circle cx="230" cy="285" r="18" fill="url(#contactGreen)" />
+    <path d="M224,285 L228,289 L237,280" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
   </g>
 
-  <!-- هاتف ذكي يعرض تطبيق (Mobile Development) -->
-  <g filter="url(#shadow)">
-    <rect x="305" y="160" width="115" height="195" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
-    <!-- سماعة الهاتف العلوية -->
-    <rect x="345" y="168" width="35" height="4" rx="2" fill="#cbd5e1" />
-    
-    <!-- محتوى شاشة الهاتف -->
-    <rect x="317" y="182" width="91" height="40" rx="8" fill="url(#primaryGrad)" />
-    <!-- كروت صغيرة داخل الهاتف -->
-    <rect x="317" y="230" width="91" height="30" rx="6" fill="#f8fafc" stroke="#edf2f7" />
-    <rect x="323" y="238" width="15" height="14" rx="3" fill="#38cf9d" />
-    <rect x="345" y="242" width="45" height="5" rx="2" fill="#94a3b8" />
-
-    <rect x="317" y="267" width="91" height="30" rx="6" fill="#f8fafc" stroke="#edf2f7" />
-    <rect x="323" y="275" width="15" height="14" rx="3" fill="#394bee" />
-    <rect x="345" y="279" width="45" height="5" rx="2" fill="#94a3b8" />
-    
-    <rect x="317" y="304" width="91" height="16" rx="5" fill="url(#accentGrad)" />
+  <!-- طائرة ورقية منطلقة (رمز إرسال الرسائل) -->
+  <g filter="url(#softShadow)">
+    <polygon points="320,135 385,95 365,160 345,145" fill="url(#contactBlue)" />
+    <polygon points="345,145 385,95 338,138" fill="#2938c4" />
   </g>
 
-  <!-- بطاقة سحابية عائمة (Cloud & Backend) -->
-  <g filter="url(#shadow)">
-    <rect x="50" y="65" width="95" height="42" rx="10" fill="#ffffff" />
-    <circle cx="72" cy="86" r="12" fill="#eef2ff" />
-    <!-- رمز سحابة مبسط -->
-    <path d="M67,88 A4,4 0 0,1 71,83 A5,5 0 0,1 77,85 A4,4 0 0,1 76,90 L67,90 Z" fill="#394bee" />
-    <rect x="90" y="80" width="40" height="5" rx="2.5" fill="#394bee" />
-    <rect x="90" y="89" width="25" height="4" rx="2" fill="#94a3b8" />
+  <!-- فقاعة دردشة علوية (Chat Bubble) -->
+  <g filter="url(#softShadow)">
+    <rect x="75" y="85" width="105" height="55" rx="14" fill="#ffffff" />
+    <!-- ذيل الفقاعة -->
+    <path d="M100,140 L100,150 L115,140 Z" fill="#ffffff" />
+    <!-- نقاط الدردشة المتحركة -->
+    <circle cx="105" cy="112" r="5" fill="#38cf9d" />
+    <circle cx="127" cy="112" r="5" fill="#394bee" />
+    <circle cx="149" cy="112" r="5" fill="#94a3b8" />
   </g>
 
-  <!-- أيقونة برمجية عائمة علوية -->
-  <g filter="url(#shadow)">
-    <circle cx="390" cy="95" r="22" fill="url(#accentGrad)" />
-    <text x="390" y="102" font-size="16" font-family="monospace" font-weight="bold" fill="#ffffff" text-anchor="middle">&lt;/&gt;</text>
+  <!-- أيقونة بريد سريعة صغيرة عائمة -->
+  <g filter="url(#softShadow)">
+    <circle cx="390" cy="260" r="22" fill="url(#contactBlue)" />
+    <rect x="380" y="252" width="20" height="15" rx="3" fill="none" stroke="#ffffff" stroke-width="1.8" />
+    <path d="M380,253 L390,261 L400,253" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
   </g>
 
-  <!-- عقد ذكاء اصطناعي متطايرة (AI Nodes) -->
-  <circle cx="60" cy="245" r="7" fill="#38cf9d" opacity="0.8" />
-  <line x1="60" y1="245" x2="80" y2="265" stroke="#38cf9d" stroke-width="2" stroke-dasharray="3,3" />
-  <circle cx="80" cy="265" r="5" fill="#394bee" opacity="0.6" />
+  <!-- ذرات وعناصر جمالية عائمة -->
+  <circle cx="320" cy="65" r="6" fill="#38cf9d" opacity="0.6" />
+  <circle cx="110" cy="250" r="4" fill="#394bee" opacity="0.4" />
+  <circle cx="280" cy="380" r="5" fill="#38cf9d" opacity="0.5" />
 </svg>
