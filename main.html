@@ -1,440 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <!-- style css -->
-     <style>
-        /* التنسيقات العامة */
-        *{
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        }
-        :root{
-            --main-color: rgb(56, 207, 157);
-            --navbar-color: rgba(57, 75, 238, 0.973) ;
-        }
-        a{
-            text-decoration: none;
-        }
-        ul{
-            list-style: none;
-        }
-        /* نهاية التنسيقات العامة */
-        header{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: var(--navbar-color);
-        }
-        header .logo{
-            font-size: 30px;
-            font-weight: 600;
-            color: #fff
-        }
-        header ul{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-        }
-        header ul li a{
-            color: #fff;
-            font-size: 20px;
-            font-weight: 600;
-            padding: 5px 10px;
-            display: inline-block;
-            border-radius: 6px;
-            transition: 0.7s;
-        }
-        header ul li a:hover,  .project .card .text button:hover{
-           background-color: #fff;
-           color: var(--navbar-color);
-        }
-        .active{
-           background-color: #fff;
-           color: var(--navbar-color);
-        }
-        .home{
-            text-align: center;
-            padding-top: 100px;
-        }
-        .home h1{
-            color: var(--navbar-color);
-            font-weight: 600;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            padding: 10px;
-           
-        }
-        .home p{
-            color: #333;
-            font-weight: 800;
-            font-size: 20px;
-            font-family:Arial, Helvetica, sans-serif;
-            width: 40%;
-            line-height: 1.3;
-            margin: auto;
-        }
-        .home .submit{
-            padding: 10px 20px;
-            margin: 10px auto;
-            border: none;
-            border-radius: 6px;
-            background-color: var(--navbar-color);
-            color: #fff;
-            font-size: 20px;
-            font-weight: 700;
-            transition: 0.7s;
-        }
-        .home .submit:hover{
-            background-color: #fff;
-            border: 1px solid var(--navbar-color);
-            color: var(--navbar-color);
-        }
+<svg viewBox="0 0 500 450" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- تدرجات الألوان المطابقة لموقعك -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#394bee" />
+      <stop offset="100%" stop-color="#2434b8" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38cf9d" />
+      <stop offset="100%" stop-color="#1ea87a" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-opacity="0.12" />
+    </filter>
+  </defs>
 
-        .Services{
-            color: var(--navbar-color);
-            margin-top: 50px;
-            background-color:aliceblue;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            width: 100%;
+  <!-- هالة خلفية ناعمة -->
+  <circle cx="250" cy="225" r="170" fill="#eef2ff" />
+  <circle cx="370" cy="110" r="30" fill="#e6faf3" />
 
-        }
-        .Services h1{
-            text-align: center;
-            grid-column:  span 3;
-            padding: 20px;
-        }
-        .Services .card{
-            transition: 0.7s;
-            cursor: pointer;
-            padding: 10px;
-            margin: 15px;
-            height: 250px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 0 5px #1111113b;
-            background-color: #fff;
-        }
-        .Services .card:hover{
-            transform: scale(1.1);
-        }
-        .Services .card .icon,.project .icon{
-            height: 50%;
-            width: 100%;
-            border-radius: 6px;
-            font-weight: 700;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 70px;
-            margin: 0 auto 5px auto;
-        }
-        .Services .card .info p{
-            padding: 10px;
-            font-weight: 600;
-        }
-        .project{
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            background-color: rgb(255, 247, 235);
-            width: 100%;
-            margin:  auto;
-            padding: 10px 20px;
-        }
-        .project h1{
-            text-align: center;
-            color: var(--navbar-color);
-            padding: 15px;
-            grid-column: span 3;
-        }
-        .project .card{
-            padding: 10px;
-            margin: 10px 10px;
-            text-align: center;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 5px #1111113b ;
-            height: fit-content;
-            color: var(--navbar-color);
-        }
-        .project .card h2{
-            margin: 5px auto;
-        }
-        .project .card .text button{
-            cursor: pointer;
-            padding: 5px 10px;
-            margin: 10px auto;
-            background-color:  var(--navbar-color);
-            color: #fff;
-            border: 2px solid var(--navbar-color);
-            font-size: 20px;
-            border-radius: 6px;
-            transition: 0.7s;
-        }
-        .about{
-            background-color: #eceaea;
-            text-align: center;
-            height: fit-content;
-        }
-        .about h1{
-            color: var(--navbar-color);
-            margin: 10px auto;
-            padding: 10px;
-        }
-        .about .icon{
-            font-size: 50px;
-            color: var(--navbar-color);
-            font-weight: 800;
-        }
-        .about p{
-            padding: 5px;
-            color: #333;
-            font-size: 18px;
-            font-weight: 700;
-            width: 70%;
-            margin: auto;
-        }
-        .about h3{
-            padding: 5px;
-           font-size: 20px;
-        }
-        .about h3 i{
-            font-size: 30px;
-            color: var(--navbar-color);
-        }
-        .about h2{
-            padding: 5px;
-            font-size: 30px;
-            color: var(--navbar-color);
-            border-radius: 6px;
-        }
-        .about .success{
-            font-size: 60px;
-            color: var(--navbar-color);
-        }
-        .conact .form{
-            gap: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .conact input , textarea{
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            background-color: #eceaea;
-            font-size: 20px;
-            direction: rtl;
-            font-weight: 600;
-        }
-        .conact .form button{
-            padding: 10px 20px;
-            border: none;
-            background-color: var(--navbar-color);
-            font-size: 20px;
-            color: #fff;
-            border-radius: 10px;
-            width: 30%;
-            margin: 10px 0 30px 0;
-        }
-        .conact .form h1{
-            color: var(--navbar-color);
-            margin: 10px 0;
-            border-bottom: 2px solid  var(--navbar-color);
-            padding: 5px;
-        }
-        footer{
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
-        }
-        @media (max-width: 700px){
-            .project{
-                background-color: red;
-                /* display: grid; */
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .project h1{
-                /* display: grid; */
-                grid-column: span 2;
-            }
-        }
-     </style>
-</head>
-<body>
-    <header>
-        <a href="#" class="logo">Ali</a>
-        <ul>
-            <li><a href="#" class="active">home</a></li>
-            <li><a href="#about">about</a></li>
-            <li><a href="#Services">Services</a></li>
-            <li><a href="#Contact">Contact</a></li>
-             <li><a href="#Project">Project</a></li>
-        </ul>
-    </header>
-    <div class="home">
-        <h1>علي القاسم</h1>
-        <p>في عالمي كل فكرة تتحول الى حقيقة باذن الله</p>
-        <button class="submit">submit</button>
-    </div>
-    <div class="Services" id="Services">
-        <h1>خدماتي</h1>
-        <div class="card">
-            <div class="icon">
-                <i class="fa-brands fa-google-play"></i>
-            </div>
-            <div class="info">
-                <h2>قوقل بلاي كونسول</h2>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="icon">
-                <i class="fa-solid fa-laptop-code"></i>
-            </div>
-            <div class="info">
-                <h2>تطوير الويب</h2>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-        </div>
-         <div class="card">
-            <div class="icon">
-                <i class="fa-solid fa-code-branch"></i>
-            </div>
-            <div class="info">
-                <h2>Git & GitHub</h2>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="icon">
-                <i class="fa-solid fa-hexagon-nodes-bolt"></i>
-            </div>
-            <div class="info">
-                <h2>vibe coding</h2>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-        </div>
-         <div class="card">
-            <div class="icon">
-                <i class="fa-solid fa-robot"></i>
-            </div>
-            <div class="info">
-                <h2>ذكاء اصطناعي</h2>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-    </div>
-     <div class="card">
-            <div class="icon">
-                <i class="fa-brands fa-medapps"></i>
-            </div>
-            <div class="info">
-                <h2>تطوير التطبيقات</h2>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-    </div>
-    </div>
-    <div class="about" id="about">
-        <h1>من انا؟</h1>
-        <div class="card">
-            <div class="icon"><i class="fa-solid fa-user"></i></div>
-            <div class="info">
-                <h2>علي القاسم احمد محمد حسين</h2>
-                <h3>مهندس برمجيات <i class="fa-solid fa-code"></i></h3>
-                <p>شاب سوداني يطمح لجعل السودان اكثر تطورا وامان ابني تطبيقات مواقع انظمة ونماذج ذكاء اصطناعي</p>
-                <h1>معاً نحو المستقبل</h1>
-                <div class="success">
-                    <i class="fa-solid fa-ranking-star"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="project" id="Project">
-        <h1>مشاريعي</h1>
-        <div class="card">
-            <div class="icon">
-                <i class="fa-solid fa-cloud-sun"></i>
-            </div>
-            <div class="text">
-                <h2>تطبيق طقس السودان</h2>
-                <p>تطبيق طقس سوداني ذكي مخصص للسودان واهله</p> 
-             <button>جربه الان</button>  
-            </div>
-        </div>
-         <div class="card">
-            <div class="icon">
-                <i class="fa-brands fa-nutritionix"></i>
-            </div>
-            <div class="text">
-             <h2>تطبيق وتين</h2>  
-             <p>تطبيق ذكي لحساب السعرات الحرارية مع مساعد ذكي وخطط كاملة لزيادة الوزن او انقاصه</p>
-             <button>جربه الان</button>  
-            </div>
-        </div>
-         <div class="card">
-            <div class="icon">
-                ##
-            </div>
-            <div class="text">
-             <h2>kairose</h2>  
-             <p>مساعد انتاجية ذكي وعمل روتين كامل وتنبيهات ذكية</p>
-             <button>جربه الان</button>  
-            </div>
-        </div>
-         <div class="card">
-            <div class="icon">
-                <i class="fa-solid fa-code"></i>
-            </div>
-            <div class="text">
-                <h2>code Nile</h2>
-                <p>منصة تجديات برمجية للغة JavaScipt مع نظام مسابقات ولوحة صدارة ومكافائات</p>
-                <button>جربه الان</button>  
-            </div>
-        </div>
-         <div class="card">
-            <div class="icon">
-                ##
-            </div>
-            <div class="text">
-             <h2>خرائط السودان</h2>  
-             <p>تطبيق طقس سوداني ذكي مخصص للسودان واهله</p> 
-             <button>جربه الان</button>  
-            </div>
-        </div>
-         <div class="card">
-            <div class="icon">
-                ##
-            </div>
-            <div class="text">
-             <h2>تطبيق تعليم القيادة</h2>  
-             <p>تطبيق طقس سوداني ذكي مخصص للسودان واهله</p> 
-             <button>جربه الان</button>  
-            </div>
-        </div>
-    </div>
-    <div class="conact" id="Contact">
-        <div class="form">
-            <h1>تواصل معنا</h1>
-        <p>نسعد بتواصلكم معنا</p>
-            <input type="text" placeholder="ادخل اسمك">
-            <input type="email" placeholder="البريد الاكتروني">
-            <textarea  cols="30" rows="10" placeholder="الرسالة"></textarea>
-            <button>ارسال</button>
-        </div>
-    </div>
-    <footer>
-        <h2>كل الحقوق محفوظة لدى المهندس علي القاسم@</h2>
-        <p></p>
-    </footer>
-</body>
-</html>
+  <!-- لابتوب المطور -->
+  <g filter="url(#shadow)">
+    <!-- شاشة اللابتوب -->
+    <rect x="75" y="110" width="270" height="175" rx="12" fill="#1e243b" />
+    <rect x="85" y="120" width="250" height="155" rx="8" fill="#121624" />
+    
+    <!-- شريط نافذة الكود والأزرار -->
+    <rect x="85" y="120" width="250" height="22" rx="6" fill="#1e243b" />
+    <circle cx="98" cy="131" r="3.5" fill="#ff5f56" />
+    <circle cx="110" cy="131" r="3.5" fill="#ffbd2e" />
+    <circle cx="122" cy="131" r="3.5" fill="#27c93f" />
+
+    <!-- أسطر برمجية منسقة بالألوان -->
+    <rect x="100" y="155" width="45" height="7" rx="3" fill="#38cf9d" />
+    <rect x="152" y="155" width="60" height="7" rx="3" fill="#394bee" />
+    <rect x="115" y="172" width="80" height="6" rx="3" fill="#64748b" />
+    <rect x="115" y="187" width="50" height="6" rx="3" fill="#ffbd2e" />
+    <rect x="170" y="187" width="75" height="6" rx="3" fill="#38cf9d" />
+    <rect x="115" y="202" width="105" height="6" rx="3" fill="#64748b" />
+    <rect x="100" y="219" width="35" height="7" rx="3" fill="#394bee" />
+
+    <!-- قاعدة اللابتوب ولوحة المفاتيح -->
+    <path d="M45,285 L375,285 L360,298 L60,298 Z" fill="#b0b8c9" />
+    <rect x="180" y="285" width="60" height="5" rx="2" fill="#7d889b" />
+  </g>
+
+  <!-- هاتف ذكي يعرض تطبيق (Mobile Development) -->
+  <g filter="url(#shadow)">
+    <rect x="305" y="160" width="115" height="195" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+    <!-- سماعة الهاتف العلوية -->
+    <rect x="345" y="168" width="35" height="4" rx="2" fill="#cbd5e1" />
+    
+    <!-- محتوى شاشة الهاتف -->
+    <rect x="317" y="182" width="91" height="40" rx="8" fill="url(#primaryGrad)" />
+    <!-- كروت صغيرة داخل الهاتف -->
+    <rect x="317" y="230" width="91" height="30" rx="6" fill="#f8fafc" stroke="#edf2f7" />
+    <rect x="323" y="238" width="15" height="14" rx="3" fill="#38cf9d" />
+    <rect x="345" y="242" width="45" height="5" rx="2" fill="#94a3b8" />
+
+    <rect x="317" y="267" width="91" height="30" rx="6" fill="#f8fafc" stroke="#edf2f7" />
+    <rect x="323" y="275" width="15" height="14" rx="3" fill="#394bee" />
+    <rect x="345" y="279" width="45" height="5" rx="2" fill="#94a3b8" />
+    
+    <rect x="317" y="304" width="91" height="16" rx="5" fill="url(#accentGrad)" />
+  </g>
+
+  <!-- بطاقة سحابية عائمة (Cloud & Backend) -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="65" width="95" height="42" rx="10" fill="#ffffff" />
+    <circle cx="72" cy="86" r="12" fill="#eef2ff" />
+    <!-- رمز سحابة مبسط -->
+    <path d="M67,88 A4,4 0 0,1 71,83 A5,5 0 0,1 77,85 A4,4 0 0,1 76,90 L67,90 Z" fill="#394bee" />
+    <rect x="90" y="80" width="40" height="5" rx="2.5" fill="#394bee" />
+    <rect x="90" y="89" width="25" height="4" rx="2" fill="#94a3b8" />
+  </g>
+
+  <!-- أيقونة برمجية عائمة علوية -->
+  <g filter="url(#shadow)">
+    <circle cx="390" cy="95" r="22" fill="url(#accentGrad)" />
+    <text x="390" y="102" font-size="16" font-family="monospace" font-weight="bold" fill="#ffffff" text-anchor="middle">&lt;/&gt;</text>
+  </g>
+
+  <!-- عقد ذكاء اصطناعي متطايرة (AI Nodes) -->
+  <circle cx="60" cy="245" r="7" fill="#38cf9d" opacity="0.8" />
+  <line x1="60" y1="245" x2="80" y2="265" stroke="#38cf9d" stroke-width="2" stroke-dasharray="3,3" />
+  <circle cx="80" cy="265" r="5" fill="#394bee" opacity="0.6" />
+</svg>
