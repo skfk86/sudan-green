@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>NEXORA Store — شحن الألعاب</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <style>
+    :root{
+      --pink:#FF1F7D;--pink2:#FF5CA8;--pink-dk:#C4005A;
+      --purple:#7B2CBF;--purple-dk:#4A0E8F;
+      --gold:#FFB800;
+      --bg:#0D0D1A;--bg2:#13131F;
+      --card:#1C1C2E;--card2:#252538;
+      --line:rgba(255,255,255,.08);
+      --text:#F0F2FF;--muted:#8892A4;
+      --r:16px;--rsm:12px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    :root{padding-top:env(safe-area-inset-top,0px)}
+    html{scroll-padding-top:env(safe-area-inset-top,0px)}
+    body{
+      background:var(--bg);color:var(--text);
+      font-family:'Cairo',system-ui,sans-serif;
+      overflow-x:hidden;
+      padding-bottom:calc(68px + env(safe-area-inset-bottom,0px));
+    }
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+    /* HEADER */
+    .s-hdr{
+      position:sticky;top:0;z-index:200;
+      background:rgba(10,10,20,.96);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(20px);
+      padding:10px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .h-ico{width:40px;height:40px;border-radius:var(--rsm);background:var(--card);display:grid;place-items:center;font-size:1.15rem;color:var(--text);position:relative;flex-shrink:0;}
+    .cart-badge{position:absolute;top:-5px;right:-5px;width:18px;height:18px;border-radius:50%;background:var(--pink);color:#fff;font-size:.58rem;font-weight:900;display:grid;place-items:center;}
+    .s-logo{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.22rem;}
+    .logo-mk{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--pink),var(--purple));display:grid;place-items:center;font-size:1.1rem;box-shadow:0 4px 18px rgba(255,31,125,.3);}
+    .logo-mk i{color:#fff}
+    .logo-t span{color:var(--pink)}
+
+    /* HERO */
+    .hero{margin:14px 14px 0;border-radius:20px;overflow:hidden;min-height:170px;position:relative;background:linear-gradient(135deg,#1a0533 0%,#2d0a5e 45%,#0d1a4a 100%);display:flex;align-items:center;padding:22px 20px;}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 78% 50%,rgba(255,31,125,.28),transparent 55%),radial-gradient(circle at 15% 85%,rgba(123,44,191,.32),transparent 50%);}
+    .hero-dots{position:absolute;top:8px;left:8px;width:55px;height:55px;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.14) 1px,transparent 1px);background-size:8px 8px;}
+    .hero-txt{position:relative;z-index:1;max-width:58%}
+    .hero-txt h1{font-size:1.32rem;font-weight:900;line-height:1.25;margin-bottom:7px}
+    .hero-txt h1 span{color:var(--gold)}
+    .hero-txt p{font-size:.72rem;color:rgba(255,255,255,.72);margin-bottom:14px}
+    .hero-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--pink2));color:#fff;font-size:.78rem;font-weight:800;box-shadow:0 4px 18px rgba(255,31,125,.38);}
+    .hero-art{position:absolute;right:-8px;bottom:0;z-index:0;height:100%;display:flex;align-items:flex-end;}
+    .hero-art img{height:156px;width:auto;object-fit:contain;filter:drop-shadow(0 0 22px rgba(255,31,125,.28));}
+
+    /* TRUST */
+    .trust{display:flex;gap:8px;padding:12px 14px;overflow-x:auto;scrollbar-width:none;}
+    .trust::-webkit-scrollbar{display:none}
+    .t-item{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--card);}
+    .t-item i{font-size:1.2rem;color:var(--pink)}
+    .t-item strong{display:block;font-size:.73rem}
+    .t-item small{display:block;font-size:.62rem;color:var(--muted);margin-top:1px}
+
+    /* PILLS */
+    .cat-bar{display:flex;gap:7px;padding:4px 14px 12px;overflow-x:auto;scrollbar-width:none;}
+    .cat-bar::-webkit-scrollbar{display:none}
+    .pill{flex:0 0 auto;padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--muted);font-size:.74rem;font-weight:700;transition:.2s;}
+    .pill.active,.pill:hover{background:var(--pink);border-color:var(--pink);color:#fff}
+
+    /* PROMO */
+    .promo{margin:0 14px 16px;border-radius:var(--r);overflow:hidden;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;min-height:88px;position:relative;}
+    .promo.purple{background:linear-gradient(120deg,#3b0a7a,#7B2CBF)}
+    .promo.pink{background:linear-gradient(120deg,#7a001e,#FF1F7D)}
+    .promo::after{content:'';position:absolute;right:-18px;bottom:-18px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.05);}
+    .promo h3{font-size:1.05rem;font-weight:900;color:var(--gold);margin-bottom:3px}
+    .promo p{font-size:.7rem;color:rgba(255,255,255,.78)}
+    .promo-icon{font-size:2.8rem;flex-shrink:0;opacity:.85}
+
+    /* SECTION HEAD */
+    .sec-hd{display:flex;align-items:center;justify-content:space-between;padding:0 14px;margin-bottom:11px;}
+    .sec-hd h2{font-size:.95rem;font-weight:800;display:flex;align-items:center;gap:8px;}
+    .sec-hd h2::before{content:'';width:4px;height:20px;border-radius:2px;background:var(--pink);}
+    .see-all{font-size:.72rem;color:var(--pink);font-weight:700}
+
+    /* GAME CARD */
+    .g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 14px;margin-bottom:20px;}
+    .g-card{border-radius:var(--rsm);overflow:hidden;background:var(--card);cursor:pointer;transition:transform .18s;-webkit-tap-highlight-color:transparent;}
+    .g-card:active{transform:scale(.93)}
+    .g-thumb{aspect-ratio:1/1;position:relative;overflow:hidden;}
+    .g-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .35s;z-index:2;}
+    .g-card:hover .g-thumb img{transform:scale(1.07)}
+    .g-over{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.6) 100%);z-index:3;}
+    .g-hot{position:absolute;top:6px;right:6px;padding:3px 7px;border-radius:6px;background:var(--pink);color:#fff;font-size:.54rem;font-weight:900;z-index:4;}
+    .g-nx{position:absolute;top:6px;left:6px;width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--pink),var(--purple));display:grid;place-items:center;font-size:.56rem;font-weight:900;color:#fff;z-index:4;}
+    .g-foot{padding:7px 8px 9px;}
+    .g-name{font-size:.7rem;font-weight:800;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .g-from{font-size:.62rem;color:var(--gold);text-align:center;font-weight:700;margin-top:2px;}
+
+    /* HOW */
+    .how{padding:4px 14px 20px}
+    .how-step{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;background:var(--card);margin-bottom:9px;}
+    .step-n{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:900;font-size:.82rem;flex-shrink:0;}
+    .s1{background:linear-gradient(135deg,var(--pink),var(--purple))}
+    .s2{background:linear-gradient(135deg,var(--purple),var(--purple-dk))}
+    .s3{background:linear-gradient(135deg,#25D366,#128C7E)}
+    .step-t strong{display:block;font-size:.84rem}
+    .step-t small{font-size:.68rem;color:var(--muted);margin-top:2px;display:block}
+
+    /* MODAL */
+    .modal-bd{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.8);backdrop-filter:blur(5px);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+    .modal-bd.on{opacity:1;pointer-events:all}
+    .modal-sh{width:100%;max-width:540px;background:var(--bg2);border-radius:28px 28px 0 0;padding:6px 20px calc(28px + env(safe-area-inset-bottom,0px));max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .38s cubic-bezier(.32,.72,0,1);}
+    .modal-bd.on .modal-sh{transform:translateY(0)}
+    .m-hnd{width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.18);margin:14px auto 20px}
+    .m-head{display:flex;align-items:center;gap:14px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:20px;}
+    .m-tmb{width:64px;height:64px;border-radius:14px;overflow:hidden;flex-shrink:0;}
+    .m-tmb img{width:100%;height:100%;object-fit:cover;}
+    .m-info h3{font-size:1.08rem;font-weight:800;margin-bottom:4px}
+    .m-info span{font-size:.7rem;color:var(--muted)}
+    .m-lbl{font-size:.75rem;font-weight:800;margin-bottom:9px;color:#cdd5e8}
+    .pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+    .pkg{position:relative}
+    .pkg input{position:absolute;opacity:0;pointer-events:none}
+    .pkg-lbl{display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 6px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);cursor:pointer;transition:.18s;text-align:center;}
+    .pkg-lbl:hover{border-color:var(--pink)}
+    .pkg input:checked+.pkg-lbl{border-color:var(--pink);background:rgba(255,31,125,.1);box-shadow:0 0 0 3px rgba(255,31,125,.12);}
+    .pkg-lbl strong{font-family:'Space Grotesk',sans-serif;font-size:.83rem;font-weight:700}
+    .pkg-lbl small{font-size:.64rem;color:var(--gold);font-weight:800}
+    .pid-wrap{margin-bottom:18px}
+    .pid-wrap input{width:100%;height:50px;padding:0 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--text);font-family:'Cairo',sans-serif;font-size:.88rem;}
+    .pid-wrap input:focus{outline:none;border-color:var(--pink)}
+    .pid-wrap input::placeholder{color:var(--muted)}
+    .m-tot{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:12px;background:var(--card);margin-bottom:16px;}
+    .m-tot .lbl{font-size:.78rem;color:var(--muted)}
+    .m-tot .val{font-weight:900;color:var(--gold);font-size:.98rem}
+    .m-err{display:none;padding:10px 14px;border-radius:10px;background:rgba(255,50,50,.1);border:1px solid rgba(255,50,50,.18);color:#ff8080;font-size:.73rem;margin-bottom:12px;}
+    .m-err.on{display:block}
+    .wa-btn{width:100%;height:54px;border-radius:14px;background:linear-gradient(90deg,#25D366,#128C7E);color:#fff;font-size:.95rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 24px rgba(37,211,102,.22);transition:.2s;}
+    .wa-btn:active{transform:scale(.97)}
+    .m-note{display:flex;align-items:center;gap:6px;justify-content:center;margin-top:11px;font-size:.65rem;color:var(--muted);}
+
+    /* BOTTOM NAV */
+    .bnav{position:fixed;bottom:0;left:0;right:0;z-index:300;background:rgba(10,10,20,.97);border-top:1px solid var(--line);backdrop-filter:blur(22px);display:flex;align-items:center;height:calc(64px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);}
+    .bn-i{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0;color:var(--muted);font-size:.58rem;font-weight:700;transition:.2s;}
+    .bn-i i{font-size:1.35rem}
+    .bn-i.on,.bn-i:hover{color:var(--pink)}
+    .bn-i.on i{filter:drop-shadow(0 0 6px var(--pink))}
+    .bn-ctr{flex:0 0 56px;margin-bottom:20px;width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,var(--pink),var(--purple));display:grid;place-items:center;box-shadow:0 6px 22px rgba(255,31,125,.4);font-size:1.6rem;color:#fff;transition:.2s;}
+    .wa-fl{position:fixed;bottom:calc(82px + env(safe-area-inset-bottom,0px));left:16px;z-index:299;width:50px;height:50px;border-radius:50%;background:#25D366;display:grid;place-items:center;font-size:1.45rem;color:#fff;animation:wap 2.8s infinite;}
+    @keyframes wap{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.42),0 0 0 0 rgba(37,211,102,.28)}55%{box-shadow:0 4px 20px rgba(37,211,102,.42),0 0 0 11px rgba(37,211,102,0)}}
+    .s-ftr{text-align:center;padding:28px 16px 20px;color:var(--muted);font-size:.68rem;border-top:1px solid var(--line);margin-top:8px;}
+    .s-ftr .flogo{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;}
+    .s-ftr .flogo span{color:var(--pink)}
+
+    /* ===== VIEWS ===== */
+    .zero{display:none!important}
+    .view{display:none}
+    .view.on{display:block;animation:vin .22s ease-out}
+    @keyframes vin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .pg-title{padding:18px 14px 2px;font-size:1.2rem;font-weight:900}
+    .pg-sub{padding:0 14px 12px;font-size:.72rem;color:var(--muted)}
+    .search{margin:0 14px 12px;position:relative}
+    .search input{width:100%;height:46px;padding:0 42px 0 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--text);font-family:inherit;font-size:.85rem}
+    .search input:focus{outline:none;border-color:var(--pink)}
+    .search input::placeholder{color:var(--muted)}
+    .search i{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+    .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:34px 10px;font-size:.8rem}
+    button.see-all{font-family:inherit}
+
+    /* ===== FAQ ===== */
+    .faq{padding:0 14px 8px}
+    .faq-i{background:var(--card);border-radius:14px;margin-bottom:9px;overflow:hidden}
+    .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;color:var(--text);font-size:.82rem;font-weight:800;text-align:right}
+    .faq-q i{transition:transform .25s;color:var(--pink);flex-shrink:0}
+    .faq-i.on .faq-q i{transform:rotate(180deg)}
+    .faq-a{display:none;padding:0 16px 15px;font-size:.74rem;line-height:1.9;color:#b8c0d4}
+    .faq-i.on .faq-a{display:block}
+    .help-cta{margin:6px 14px 22px;padding:18px;border-radius:var(--r);background:var(--card);text-align:center}
+    .help-cta p{font-size:.78rem;font-weight:800;margin-bottom:4px}
+    .help-cta small{display:block;font-size:.68rem;color:var(--muted);margin-bottom:14px}
+
+    /* ===== DRAWER ===== */
+    .dr-bd{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.72);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+    .dr-bd.on{opacity:1;pointer-events:all}
+    .drawer{position:absolute;top:0;bottom:0;left:0;width:min(82vw,320px);background:var(--bg2);border-right:1px solid var(--line);transform:translateX(-100%);transition:transform .35s cubic-bezier(.32,.72,0,1);display:flex;flex-direction:column;padding:calc(14px + env(safe-area-inset-top,0px)) 0 calc(16px + env(safe-area-inset-bottom,0px));overflow-y:auto}
+    .dr-bd.on .drawer{transform:none}
+    .dr-hd{display:flex;align-items:center;justify-content:space-between;padding:4px 20px 16px;border-bottom:1px solid var(--line);margin-bottom:6px}
+    .dr-i{width:100%;display:flex;align-items:center;gap:13px;padding:13px 20px;font-size:.88rem;font-weight:700;color:var(--text);text-align:right}
+    .dr-i i{color:var(--pink);font-size:1.15rem;width:24px;text-align:center;flex-shrink:0}
+    .dr-i:active{background:var(--card)}
+    .dr-i .cnt{margin-inline-start:auto;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--pink);color:#fff;font-size:.66rem;font-weight:900;display:grid;place-items:center}
+    .dr-sep{padding:16px 20px 4px;font-size:.68rem;color:var(--muted);font-weight:700}
+    .dr-ft{margin-top:auto;padding:18px 20px 0;font-size:.62rem;color:var(--muted);text-align:center}
+
+    /* ===== MODAL EXTRAS ===== */
+    .m-x{margin-inline-start:auto;width:36px;height:36px;border-radius:50%;background:var(--card);color:var(--muted);display:grid;place-items:center;flex-shrink:0;font-size:.9rem}
+    .m-btn2{width:100%;height:48px;border-radius:14px;border:1.5px solid var(--pink);color:var(--pink);font-weight:800;font-size:.86rem;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;transition:.2s}
+    .m-btn2:active{background:rgba(255,31,125,.12)}
+    .m-btn2.mute{border-color:var(--line);color:var(--muted)}
+
+    /* ===== CART ===== */
+    .ci{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;background:var(--card);margin-bottom:9px}
+    .ci img{width:54px;height:54px;border-radius:12px;object-fit:cover;flex-shrink:0}
+    .ci-b{flex:1;min-width:0}
+    .ci-b strong{display:block;font-size:.8rem}
+    .ci-b small{display:block;font-size:.66rem;color:var(--muted);margin-top:2px;word-break:break-all}
+    .ci-p{font-size:.76rem;font-weight:900;color:var(--gold);margin-top:3px}
+    .ci-side{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0}
+    .qty{display:flex;align-items:center;gap:6px;background:var(--card2);border-radius:999px;padding:2px}
+    .qty button{width:26px;height:26px;border-radius:50%;color:var(--text);font-size:1rem;display:grid;place-items:center}
+    .qty button:active{background:var(--pink)}
+    .qty span{font-size:.78rem;font-weight:800;min-width:16px;text-align:center}
+    .ci-del{color:#ff8080;font-size:1rem;padding:2px}
+    .cart-empty{text-align:center;padding:26px 10px 8px;color:var(--muted);font-size:.84rem;line-height:1.9}
+    .cart-empty i{font-size:2.8rem;display:block;margin-bottom:6px;color:var(--pink)}
+    .cart-empty small{font-size:.7rem}
+
+    /* ===== TOAST ===== */
+    .toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);background:#2a2a42;border:1px solid var(--line);color:#fff;padding:10px 18px;border-radius:999px;font-size:.76rem;font-weight:700;z-index:700;opacity:0;pointer-events:none;transition:.3s;white-space:nowrap}
+    .toast.on{opacity:1;transform:translate(-50%,0)}
+
+    @media(min-width:900px){
+      .pg-title,.pg-sub{padding-left:32px;padding-right:32px}
+      .search,.help-cta{margin-left:32px;margin-right:32px}
+      .faq{padding-left:32px;padding-right:32px}
+      .search{max-width:520px}
+      .toast{bottom:32px}
+    }
+
+    @media(min-width:640px){.g-grid{grid-template-columns:repeat(4,1fr)}}
+    @media(min-width:900px){body{padding-bottom:0}.bnav{display:none}.g-grid{grid-template-columns:repeat(5,1fr)}.hero,.promo{margin-left:32px;margin-right:32px}.g-grid,.sec-hd,.cat-bar,.trust,.how{padding-left:32px;padding-right:32px}.s-hdr{padding-left:32px;padding-right:32px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+
+<header class="s-hdr">
+  <button class="h-ico" id="hCart" aria-label="سلة الطلبات"><i class="bi bi-bag-fill"></i><span class="cart-badge zero" id="cBadge">0</span></button>
+  <a class="s-logo" href="#" data-nav="home"><span class="logo-mk"><i class="bi bi-controller"></i></span><span class="logo-t">NEX<span>ORA</span></span></a>
+  <button class="h-ico" id="hMenu" aria-label="القائمة"><i class="bi bi-list"></i></button>
+</header>
+
+<section class="view on" id="v-home">
+<div class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-txt">
+    <h1>اشحن <span>جميع</span><br/>ألعابك من<br/>مكان واحد</h1>
+    <p>سريع · آمن · عبر واتساب</p>
+    <a href="#" class="hero-btn" data-nav="games">اشحن الآن <i class="bi bi-arrow-left"></i></a>
+  </div>
+  <div class="hero-art">
+    <img src="https://files.manuscdn.com/search-media/310419663031174812/4bFuX7zg8XtPNVrg7HmfjK/Kujna4orw2ztdTikb9KThf.jpg" alt=""/>
+  </div>
+</div>
+
+<div class="trust">
+  <div class="t-item"><i class="bi bi-lightning-charge-fill"></i><div><strong>شحن سريع</strong><small>خلال دقائق</small></div></div>
+  <div class="t-item"><i class="bi bi-shield-check-fill"></i><div><strong>آمن 100%</strong><small>لا كلمة مرور</small></div></div>
+  <div class="t-item"><i class="bi bi-headset"></i><div><strong>دعم مستمر</strong><small>24/7 واتساب</small></div></div>
+  <div class="t-item"><i class="bi bi-check2-all"></i><div><strong>+5000 طلب</strong><small>منجز بنجاح</small></div></div>
+</div>
+
+<div class="promo purple">
+  <div><h3>الشحن بال ID</h3><p>اشحن حسابك بال Player ID بسهولة</p></div>
+  <div class="promo-icon">🎮</div>
+</div>
+
+<div class="cat-bar" id="pills1">
+  <button class="pill active" data-f="all">الكل</button>
+  <button class="pill" data-f="popular">🔥 الأكثر طلبًا</button>
+  <button class="pill" data-f="mobile">📱 موبايل</button>
+  <button class="pill" data-f="pc">💻 كمبيوتر</button>
+</div>
+
+<div class="sec-hd"><h2>الألعاب المتاحة</h2><button class="see-all" data-nav="games">عرض الكل</button></div>
+<div class="g-grid" id="gGrid"></div>
+
+<div class="promo pink">
+  <div><h3>الشحن عبر واتساب</h3><p>اشحن حسابك والعب بلا حدود</p></div>
+  <div class="promo-icon">💬</div>
+</div>
+
+<div class="sec-hd" style="margin-top:8px"><h2>كيف يعمل NEXORA؟</h2></div>
+<div class="how">
+  <div class="how-step"><span class="step-n s1">01</span><div class="step-t"><strong>اختر لعبتك والباقة</strong><small>حدد اللعبة، الباقة، وأدخل Player ID</small></div></div>
+  <div class="how-step"><span class="step-n s2">02</span><div class="step-t"><strong>أرسل الطلب واتساب</strong><small>رسالة جاهزة بكل التفاصيل تلقائيًا</small></div></div>
+  <div class="how-step"><span class="step-n s3">03</span><div class="step-t"><strong>تحقق، ادفع، واشحن</strong><small>ينفذ المشرف الشحن بعد تأكيد الدفع</small></div></div>
+</div>
+
+</section>
+
+<!-- ===== صفحة الألعاب ===== -->
+<section class="view" id="v-games">
+  <h1 class="pg-title">الألعاب</h1>
+  <p class="pg-sub">اختر لعبتك ثم الباقة وأرسل الطلب عبر واتساب</p>
+  <div class="search"><i class="bi bi-search"></i><input id="gSearch" type="search" placeholder="ابحث عن لعبة…" autocomplete="off"/></div>
+  <div class="cat-bar" id="pills2">
+    <button class="pill active" data-f="all">الكل</button>
+    <button class="pill" data-f="popular">🔥 الأكثر طلبًا</button>
+    <button class="pill" data-f="mobile">📱 موبايل</button>
+    <button class="pill" data-f="pc">💻 كمبيوتر</button>
+  </div>
+  <div class="g-grid" id="gGrid2"></div>
+</section>
+
+<!-- ===== صفحة المساعدة ===== -->
+<section class="view" id="v-help">
+  <h1 class="pg-title">المساعدة</h1>
+  <p class="pg-sub">إجابات سريعة عن أكثر الأسئلة شيوعًا</p>
+  <div class="faq" id="faq">
+    <div class="faq-i on"><button class="faq-q">كيف أطلب شحن؟<i class="bi bi-chevron-down"></i></button>
+      <div class="faq-a">اختر اللعبة ثم الباقة، وأدخل Player ID، واضغط «اطلب الآن عبر واتساب». ستفتح رسالة جاهزة بكل التفاصيل، أرسلها لنا مباشرة. وللطلب أكثر من باقة استخدم السلة وأرسلها دفعة واحدة.</div></div>
+    <div class="faq-i"><button class="faq-q">أين أجد Player ID؟<i class="bi bi-chevron-down"></i></button>
+      <div class="faq-a">يظهر داخل اللعبة في صفحة الملف الشخصي (Profile). في موبايل ليجند أدخل ID مع رقم Zone، وفي فالورانت أدخل Riot ID بصيغة الاسم#TAG، وفي روبلوكس اسم المستخدم.</div></div>
+    <div class="faq-i"><button class="faq-q">هل تطلبون كلمة المرور؟<i class="bi bi-chevron-down"></i></button>
+      <div class="faq-a">لا. نحتاج Player ID فقط. لا تشارك كلمة مرور حسابك مع أي أحد.</div></div>
+    <div class="faq-i"><button class="faq-q">كيف أدفع؟<i class="bi bi-chevron-down"></i></button>
+      <div class="faq-a">بعد وصول طلبك على واتساب يرسل لك المشرف تفاصيل الدفع، وبعد تأكيد الدفع ينفذ الشحن.</div></div>
+    <div class="faq-i"><button class="faq-q">كم يستغرق الشحن؟<i class="bi bi-chevron-down"></i></button>
+      <div class="faq-a">غالبًا خلال دقائق بعد تأكيد الدفع، وقد يطول قليلًا في أوقات الازدحام.</div></div>
+    <div class="faq-i"><button class="faq-q">أدخلت Player ID خاطئًا، ماذا أفعل؟<i class="bi bi-chevron-down"></i></button>
+      <div class="faq-a">تواصل معنا فورًا على واتساب قبل التنفيذ ليتم تصحيحه. راجع الـ ID جيدًا قبل إرسال الطلب.</div></div>
+  </div>
+  <div class="help-cta">
+    <p>لم تجد إجابتك؟</p>
+    <small>فريق الدعم متاح على واتساب</small>
+    <a class="wa-btn" id="hWa" href="#"><i class="bi bi-whatsapp" style="font-size:1.3rem"></i> تواصل مع الدعم</a>
+  </div>
+</section>
+
+<footer class="s-ftr">
+  <div class="flogo">NEX<span>ORA</span> Store</div>
+  <p>شحن الألعاب بسرعة وأمان عبر واتساب</p>
+  <p style="margin-top:5px">© 2026 NEXORA. جميع الحقوق محفوظة.</p>
+</footer>
+
+<div class="modal-bd" id="mBd">
+  <div class="modal-sh">
+    <div class="m-hnd"></div>
+    <div class="m-head">
+      <div class="m-tmb" id="mTmb"><img id="mImg" src="" alt=""/></div>
+      <div class="m-info"><h3 id="mName"></h3><span id="mCat"></span></div>
+      <button class="m-x" data-close aria-label="إغلاق"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <p class="m-lbl">اختر الباقة</p>
+    <div class="pkgs" id="mPkgs"></div>
+    <p class="m-lbl" id="mLbl">Player ID</p>
+    <div class="pid-wrap"><input type="text" id="mPid" placeholder="مثال: 123456789" autocomplete="off" inputmode="numeric"/></div>
+    <div class="m-tot"><span class="lbl">الإجمالي</span><span class="val" id="mTot">— ج.س</span></div>
+    <div class="m-err" id="mErr"></div>
+    <button class="wa-btn" id="mSub"><i class="bi bi-whatsapp" style="font-size:1.3rem"></i> اطلب الآن عبر واتساب</button>
+    <button class="m-btn2" id="mAdd"><i class="bi bi-bag-plus-fill"></i> أضف إلى السلة</button>
+    <div class="m-note"><i class="bi bi-lock-fill"></i> لا نطلب كلمة المرور — الدفع عبر واتساب</div>
+  </div>
+</div>
+
+<nav class="bnav">
+  <a href="#" class="bn-i on" data-nav="home"><i class="bi bi-house-fill"></i><span>الرئيسية</span></a>
+  <a href="#" class="bn-i" data-nav="games"><i class="bi bi-grid-fill"></i><span>الألعاب</span></a>
+  <a href="#" class="bn-ctr" id="waBnC"><i class="bi bi-whatsapp"></i></a>
+  <a href="#" class="bn-i" id="waBnI"><i class="bi bi-chat-fill"></i><span>دعم</span></a>
+  <a href="#" class="bn-i" data-nav="help"><i class="bi bi-question-circle-fill"></i><span>مساعدة</span></a>
+</nav>
+<a class="wa-fl" id="waF" href="#"><i class="bi bi-whatsapp"></i></a>
+
+<!-- ===== القائمة الجانبية ===== -->
+<div class="dr-bd" id="drBd">
+  <aside class="drawer">
+    <div class="dr-hd">
+      <span class="s-logo"><span class="logo-mk"><i class="bi bi-controller"></i></span><span class="logo-t">NEX<span>ORA</span></span></span>
+      <button class="m-x" data-close aria-label="إغلاق"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <button class="dr-i" data-nav="home"><i class="bi bi-house-fill"></i>الرئيسية</button>
+    <button class="dr-i" data-nav="games"><i class="bi bi-grid-fill"></i>كل الألعاب</button>
+    <button class="dr-i" id="drCart"><i class="bi bi-bag-fill"></i>سلة الطلبات<span class="cnt zero" id="drCnt">0</span></button>
+    <button class="dr-i" data-nav="help"><i class="bi bi-question-circle-fill"></i>المساعدة</button>
+    <p class="dr-sep">التصنيفات</p>
+    <button class="dr-i" data-go="popular"><i class="bi bi-fire"></i>الأكثر طلبًا</button>
+    <button class="dr-i" data-go="mobile"><i class="bi bi-phone-fill"></i>ألعاب الموبايل</button>
+    <button class="dr-i" data-go="pc"><i class="bi bi-pc-display"></i>ألعاب الكمبيوتر</button>
+    <p class="dr-sep">تواصل</p>
+    <a class="dr-i" id="drWa" href="#"><i class="bi bi-whatsapp"></i>تواصل عبر واتساب</a>
+    <div class="dr-ft">© 2026 NEXORA</div>
+  </aside>
+</div>
+
+<!-- ===== سلة الطلبات ===== -->
+<div class="modal-bd" id="cBd">
+  <div class="modal-sh">
+    <div class="m-hnd"></div>
+    <div class="m-head">
+      <div class="m-info"><h3>سلة الطلبات</h3><span id="cSub"></span></div>
+      <button class="m-x" data-close aria-label="إغلاق"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div id="cList"></div>
+    <div id="cFoot">
+      <div class="m-tot"><span class="lbl">الإجمالي</span><span class="val" id="cTot">—</span></div>
+      <button class="wa-btn" id="cSend"><i class="bi bi-whatsapp" style="font-size:1.3rem"></i> إرسال كل الطلبات عبر واتساب</button>
+      <button class="m-btn2 mute" id="cClear"><i class="bi bi-trash3"></i> تفريغ السلة</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+
+<script>
+const WA='249901758765';
+const fmt=v=>`${Number(v).toLocaleString('en-US')} ج.س`;
+let active=null;
+
+/* ─────────────────────────────
+   توليد صورة SVG لكل لعبة
+───────────────────────────── */
+function makeSVG({c1,c2,c3,label1,label2,l1color,l2color,shapes}){
+  const id='g'+Math.random().toString(36).slice(2,6);
+  const sh=shapes||'';
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+    <defs>
+      <linearGradient id="${id}a" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0%" stop-color="${c1}"/>
+        <stop offset="60%" stop-color="${c2}"/>
+        <stop offset="100%" stop-color="${c3||c2}"/>
+      </linearGradient>
+      <radialGradient id="${id}b" cx="75%" cy="25%" r="55%">
+        <stop offset="0%" stop-color="${c3||c2}" stop-opacity=".45"/>
+        <stop offset="100%" stop-color="${c1}" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="240" height="240" fill="url(#${id}a)"/>
+    <rect width="240" height="240" fill="url(#${id}b)"/>
+    ${sh}
+    <text x="120" y="${label2?'118':'130'}" text-anchor="middle" fill="${l1color||'#fff'}"
+      font-size="36" font-weight="900" font-family="Arial Black,Arial,sans-serif"
+      paint-order="stroke" stroke="${c1}" stroke-width="3">${label1}</text>
+    ${label2?`<text x="120" y="158" text-anchor="middle" fill="${l2color||'rgba(255,255,255,.75)'}"
+      font-size="26" font-weight="700" font-family="Arial,sans-serif"
+      paint-order="stroke" stroke="${c1}" stroke-width="2">${label2}</text>`:''}
+  </svg>`;
+  return 'data:image/svg+xml;base64,'+btoa(svg);
+}
+
+/* ──────────────────────────────
+   بيانات الألعاب
+────────────────────────────── */
+const G=[
+  /* ═ Free Fire ═ */
+  {id:'freefire',name:'فري فاير',cat:'mobile',hot:true,cl:'موبايل · باتل رويال',
+   svgCfg:{c1:'#0a0000',c2:'#a02000',c3:'#ff5500',label1:'FREE',label2:'FIRE',l1color:'#ff6600',l2color:'#ffcc00',
+     shapes:`<circle cx="190" cy="30" r="55" fill="#ff4400" opacity=".22"/>
+             <ellipse cx="50" cy="200" rx="70" ry="40" fill="#ff2200" opacity=".12"/>
+             <rect x="0" y="185" width="240" height="4" fill="#ff4400" opacity=".3"/>`},
+   img:'',
+   pkgs:[{l:'100 💎',p:3500},{l:'310 💎',p:9500},{l:'520 💎',p:15000},{l:'1060 💎',p:28000},{l:'2180 💎',p:55000},{l:'Weekly Pass',p:12000}]},
+
+  /* ═ PUBG Mobile ═ */
+  {id:'pubg',name:'ببجي موبايل',cat:'mobile',hot:true,cl:'موبايل · أكشن',
+   svgCfg:{c1:'#080500',c2:'#5c3800',c3:'#e8a000',label1:'PUBG',label2:'MOBILE',l1color:'#ffcc00',
+     shapes:`<circle cx="180" cy="45" r="45" fill="#ffaa00" opacity=".2"/>
+             <rect x="0" y="195" width="240" height="45" fill="#3d2600" opacity=".5"/>`},
+   img:'https://files.manuscdn.com/search-media/310419663031174812/4bFuX7zg8XtPNVrg7HmfjK/ZeGG86id5iBhEkRrVHkg9c.jpg',
+   pkgs:[{l:'60 UC',p:4500},{l:'325 UC',p:15000},{l:'660 UC',p:28000},{l:'1800 UC',p:72000},{l:'3850 UC',p:148000},{l:'Royale Pass',p:22000}]},
+
+  /* ═ Mobile Legends ═ */
+  {id:'mlbb',name:'موبايل ليجند',cat:'mobile',hot:true,cl:'موبايل · MOBA',
+   svgCfg:{c1:'#000510',c2:'#0a2f7a',c3:'#2a7fff',label1:'MOBILE',label2:'LEGENDS',l1color:'#4fc3f7',
+     shapes:`<polygon points="120,10 220,70 220,170 120,230 20,170 20,70" fill="none" stroke="#4fc3f7" stroke-width="1" opacity=".25"/>
+             <circle cx="120" cy="120" r="80" fill="none" stroke="#2a7fff" stroke-width="1" opacity=".2"/>`},
+   img:'https://files.manuscdn.com/search-media/310419663031174812/4bFuX7zg8XtPNVrg7HmfjK/sZAmZE4zXkxu5P77zuk48i.webp',
+   pkgs:[{l:'86 💎',p:4500},{l:'172 💎',p:8500},{l:'257 💎',p:12000},{l:'706 💎',p:30000},{l:'2195 💎',p:85000},{l:'Weekly Pass',p:13000}]},
+
+  /* ═ Valorant ═ */
+  {id:'valorant',name:'فالورانت',cat:'pc',hot:true,cl:'كمبيوتر · تنافسي',
+   svgCfg:{c1:'#050000',c2:'#6a0010',c3:'#ff1235',label1:'VALO',label2:'RANT',l1color:'#ff4655',l2color:'#fff',
+     shapes:`<line x1="0" y1="120" x2="240" y2="120" stroke="#ff1235" stroke-width="1" opacity=".35"/>
+             <polygon points="120,20 200,120 120,220 40,120" fill="none" stroke="#ff4655" stroke-width="1" opacity=".2"/>
+             <circle cx="120" cy="120" r="10" fill="#ff4655" opacity=".7"/>`},
+   img:'https://files.manuscdn.com/search-media/310419663031174812/4bFuX7zg8XtPNVrg7HmfjK/RnHJ6pEz4btKz5dLhc7NuF.jpg',
+   pkgs:[{l:'475 VP',p:14000},{l:'1000 VP',p:28000},{l:'2050 VP',p:55000},{l:'3650 VP',p:95000},{l:'5350 VP',p:138000},{l:'11000 VP',p:275000}]},
+
+  /* ═ Genshin Impact ═ */
+  {id:'genshin',name:'جينشن إمباكت',cat:'mobile',hot:false,cl:'موبايل · RPG',
+   svgCfg:{c1:'#000510',c2:'#0d3f80',c3:'#1a7ab0',label1:'GENSHIN',label2:'IMPACT',l1color:'#4fc3f7',l2color:'#ffd700',
+     shapes:`<circle cx="120" cy="120" r="90" fill="none" stroke="#4fc3f7" stroke-width="1" opacity=".18"/>
+             <path d="M120 30 L200 120 L120 210 L40 120 Z" fill="none" stroke="#ffd700" stroke-width="1" opacity=".2"/>
+             <circle cx="120" cy="120" r="12" fill="#ffd700" opacity=".5"/>`},
+   img:'https://files.manuscdn.com/search-media/310419663031174812/4bFuX7zg8XtPNVrg7HmfjK/6FkMw5z7ga6nLhLDzyZEdZ.jpg',
+   pkgs:[{l:'60 Crystal',p:5000},{l:'300+30',p:18000},{l:'980+110',p:45000},{l:'1980+260',p:85000},{l:'3280+600',p:135000},{l:'6480+1600',p:265000}]},
+
+  /* ═ EA FC Mobile ═ */
+  {id:'eafc',name:'EA FC موبايل',cat:'mobile',hot:false,cl:'موبايل · رياضة',
+   svgCfg:{c1:'#000d00',c2:'#024a18',c3:'#047a30',label1:'EA FC',label2:'MOBILE',l1color:'#00e676',l2color:'#fff',
+     shapes:`<ellipse cx="120" cy="120" rx="95" ry="95" fill="none" stroke="#00c853" stroke-width="1.5" opacity=".25"/>
+             <line x1="120" y1="25" x2="120" y2="215" stroke="#00c853" stroke-width="1" opacity=".2"/>
+             <path d="M25,120 Q75,60 120,55 Q165,60 215,120" fill="none" stroke="#00c853" stroke-width="1" opacity=".2"/>`},
+   img:'',
+   pkgs:[{l:'105 Points',p:5500},{l:'575 Points',p:20000},{l:'1200 Points',p:40000},{l:'2500 Points',p:78000},{l:'5200 Points',p:155000},{l:'Star Pass',p:28000}]},
+
+  /* ═ Clash of Clans ═ */
+  {id:'coc',name:'كلاش أوف كلانس',cat:'mobile',hot:true,cl:'موبايل · استراتيجي',
+   svgCfg:{c1:'#120800',c2:'#7a3c00',c3:'#e87800',label1:'CLASH',label2:'OF CLANS',l1color:'#ffd700',l2color:'#ffaa44',
+     shapes:`<rect x="80" y="40" width="80" height="100" rx="4" fill="none" stroke="#ffd700" stroke-width="1.5" opacity=".3"/>
+             <rect x="95" y="20" width="20" height="30" rx="2" fill="none" stroke="#ffd700" stroke-width="1.5" opacity=".3"/>
+             <rect x="125" y="20" width="20" height="30" rx="2" fill="none" stroke="#ffd700" stroke-width="1.5" opacity=".3"/>
+             <rect x="65" y="140" width="110" height="12" rx="2" fill="#e87800" opacity=".35"/>`},
+   img:'',
+   pkgs:[{l:'80 💎',p:4000},{l:'500 💎',p:22000},{l:'1200 💎',p:50000},{l:'2500 💎',p:98000},{l:'6500 💎',p:245000},{l:'14000 💎',p:490000}]},
+
+  /* ═ Roblox ═ */
+  {id:'roblox',name:'روبلوكس',cat:'mobile',hot:true,cl:'موبايل / PC · مفتوح',
+   svgCfg:{c1:'#0d0000',c2:'#7a0000',c3:'#cc0000',label1:'ROBLOX',l1color:'#fff',
+     shapes:`<rect x="60" y="60" width="50" height="50" rx="6" fill="#cc0000" opacity=".35"/>
+             <rect x="130" y="60" width="50" height="50" rx="6" fill="#cc0000" opacity=".25"/>
+             <rect x="60" y="130" width="50" height="50" rx="6" fill="#cc0000" opacity=".25"/>
+             <rect x="130" y="130" width="50" height="50" rx="6" fill="#cc0000" opacity=".35"/>`},
+   img:'',
+   pkgs:[{l:'400 Robux',p:7000},{l:'800 Robux',p:13000},{l:'1700 Robux',p:25000},{l:'4500 Robux',p:62000},{l:'10000 Robux',p:135000},{l:'22500 Robux',p:290000}]},
+
+  /* ═ Call of Duty Mobile ═ */
+  {id:'codm',name:'كود موبايل',cat:'mobile',hot:false,cl:'موبايل · أكشن',
+   svgCfg:{c1:'#030500',c2:'#0f2000',c3:'#2a4a12',label1:'CALL OF',label2:'DUTY',l1color:'#8bc34a',l2color:'#fff',
+     shapes:`<rect x="20" y="20" width="200" height="200" rx="4" fill="none" stroke="#3d7a00" stroke-width="1" opacity=".25"/>
+             <line x1="20" y1="120" x2="240" y2="120" stroke="#4a8c00" stroke-width="1" opacity=".2"/>
+             <line x1="120" y1="20" x2="120" y2="220" stroke="#4a8c00" stroke-width="1" opacity=".2"/>
+             <circle cx="120" cy="120" r="30" fill="none" stroke="#8bc34a" stroke-width="1.5" opacity=".3"/>
+             <circle cx="120" cy="120" r="4" fill="#8bc34a" opacity=".6"/>`},
+   img:'',
+   pkgs:[{l:'80 CP',p:4000},{l:'400 CP',p:18000},{l:'800 CP',p:34000},{l:'2000 CP',p:82000},{l:'5000 CP',p:198000},{l:'Battle Pass',p:20000}]},
+
+  /* ═ Blood Strike ═ */
+  {id:'bs',name:'بلود ستراك',cat:'mobile',hot:false,cl:'موبايل · باتل رويال',
+   svgCfg:{c1:'#000810',c2:'#003a5c',c3:'#0080c0',label1:'BLOOD',label2:'STRIKE',l1color:'#00e5ff',l2color:'#fff',
+     shapes:`<circle cx="120" cy="120" r="85" fill="none" stroke="#00b0d8" stroke-width="1" opacity=".22"/>
+             <circle cx="120" cy="120" r="50" fill="none" stroke="#00d4ff" stroke-width="1" opacity=".18"/>
+             <line x1="120" y1="35" x2="120" y2="205" stroke="#00d4ff" stroke-width="1" opacity=".2"/>
+             <line x1="35" y1="120" x2="205" y2="120" stroke="#00d4ff" stroke-width="1" opacity=".2"/>`},
+   img:'',
+   pkgs:[{l:'60 BC',p:3000},{l:'300 BC',p:13000},{l:'980 BC',p:40000},{l:'1980 BC',p:78000},{l:'3280 BC',p:125000},{l:'Season Pass',p:16000}]},
+];
+
+/* ─── توليد data-URI للـ SVG ─── */
+G.forEach(g=>{g._svgUri=makeSVG(g.svgCfg);});
+
+/* ─── أدوات ─── */
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $=id=>document.getElementById(id);
+const gameEn=g=>(g.svgCfg.label1+' '+(g.svgCfg.label2||'')).toLowerCase();
+
+/* ─── رندر الألعاب ─── */
+function render(gridId,list){
+  const el=$(gridId);
+  if(!list.length){el.innerHTML='<div class="empty">لا توجد ألعاب مطابقة</div>';return}
+  el.innerHTML=list.map(g=>`
+    <div class="g-card" data-id="${g.id}">
+      <div class="g-thumb">
+        <img src="${g._svgUri}" alt="${g.name}" style="z-index:1"/>
+        ${g.img?`<img src="${g.img}" alt="${g.name}" loading="lazy" onerror="this.remove()" style="z-index:2"/>`:''}
+        <div class="g-over"></div>
+        <span class="g-nx">NX</span>
+        ${g.hot?'<span class="g-hot">🔥 شائع</span>':''}
+      </div>
+      <div class="g-foot">
+        <div class="g-name">${g.name}</div>
+        <div class="g-from">من ${fmt(g.pkgs[0].p)}</div>
+      </div>
+    </div>`).join('');
+  el.querySelectorAll('.g-card').forEach(c=>c.addEventListener('click',()=>openM(c.dataset.id)));
+}
+const byFilter=f=>f==='all'?G:f==='popular'?G.filter(g=>g.hot):G.filter(g=>g.cat===f);
+let f1='all',f2='all',q2='';
+function renderHome(){render('gGrid',byFilter(f1))}
+function renderGames(){
+  const q=q2.trim().toLowerCase();
+  render('gGrid2',byFilter(f2).filter(g=>!q||g.name.toLowerCase().includes(q)||gameEn(g).includes(q)||g.cl.toLowerCase().includes(q)));
+}
+function setPill(boxId,f){document.querySelectorAll('#'+boxId+' .pill').forEach(x=>x.classList.toggle('active',x.dataset.f===f))}
+function bindPills(boxId,cb){
+  document.querySelectorAll('#'+boxId+' .pill').forEach(b=>b.addEventListener('click',()=>{setPill(boxId,b.dataset.f);cb(b.dataset.f)}));
+}
+bindPills('pills1',f=>{f1=f;renderHome()});
+bindPills('pills2',f=>{f2=f;renderGames()});
+$('gSearch').addEventListener('input',e=>{q2=e.target.value;renderGames()});
+
+/* ─── الصفحات والطبقات (قائمة / سلة / نافذة الشحن) ─── */
+const LAYERS=['mBd','cBd','drBd'];
+let curView='home',cur=null,pend=null;
+function setView(v){
+  curView=v;
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.querySelectorAll('.bn-i[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===v));
+  window.scrollTo(0,0);
+}
+function showView(v){
+  if(v===curView){window.scrollTo(0,0);return}
+  setView(v);history.pushState({view:v},'');
+}
+function showLayer(id){
+  LAYERS.forEach(l=>$(l).classList.toggle('on',l===id));
+  document.body.style.overflow=id?'hidden':'';
+}
+function openLayer(id){
+  if(cur===id)return;
+  if(cur)history.replaceState({layer:id,view:curView},'');
+  else history.pushState({layer:id,view:curView},'');
+  cur=id;showLayer(id);
+}
+/* الإغلاق عبر history.back حتى يعمل زر الرجوع في أندرويد بنفس الطريقة */
+function closeLayer(cb){
+  if(!cur){if(cb)cb();return}
+  pend=cb||null;history.back();
+}
+window.addEventListener('popstate',e=>{
+  if(cur){cur=null;showLayer(null)}
+  else setView((e.state&&e.state.view)||'home');
+  if(pend){const f=pend;pend=null;f()}
+});
+history.replaceState({view:'home'},'');
+
+LAYERS.forEach(id=>{const el=$(id);el.addEventListener('click',e=>{if(e.target===el)closeLayer()})});
+document.addEventListener('click',e=>{
+  if(e.target.closest('[data-close]')){e.preventDefault();closeLayer();return}
+  const n=e.target.closest('[data-nav]');
+  if(n){e.preventDefault();const v=n.dataset.nav;closeLayer(()=>showView(v));return}
+  const g=e.target.closest('[data-go]');
+  if(g){e.preventDefault();const f=g.dataset.go;closeLayer(()=>{f2=f;q2='';$('gSearch').value='';setPill('pills2',f);renderGames();showView('games')});return}
+});
+$('hMenu').addEventListener('click',()=>openLayer('drBd'));
+$('hCart').addEventListener('click',()=>openCart());
+$('drCart').addEventListener('click',()=>closeLayer(openCart));
+document.querySelectorAll('.faq-q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('on')));
+
+/* ─── إشعار صغير ─── */
+let tt;
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
+
+/* ─── بيانات حقل الحساب لكل لعبة ─── */
+const ID_META={
+  freefire:{n:1},pubg:{n:1},genshin:{n:1},codm:{n:1},bs:{n:1},
+  mlbb:{lbl:'Player ID (Zone ID)',ph:'مثال: 123456789 (1234)'},
+  valorant:{lbl:'Riot ID',ph:'مثال: Name#1234'},
+  roblox:{lbl:'اسم المستخدم',ph:'اسم الحساب في روبلوكس'},
+  coc:{lbl:'Player Tag',ph:'مثال: #2PP0JCCL'}
+};
+const AR_DIGITS='٠١٢٣٤٥٦٧٨٩';
+const normPid=s=>s.trim().replace(/[٠-٩]/g,d=>AR_DIGITS.indexOf(d));
+
+/* ─── السلة ─── */
+let cart=[];
+try{cart=JSON.parse(localStorage.getItem('nx_cart')||'[]')}catch(e){cart=[]}
+if(!Array.isArray(cart))cart=[];
+cart=cart.filter(i=>{const g=G.find(x=>x.id===i.gid);return g&&g.pkgs[i.pi]&&i.pid&&i.q>0});
+function saveCart(){try{localStorage.setItem('nx_cart',JSON.stringify(cart))}catch(e){}}
+const gp=i=>G.find(g=>g.id===i.gid).pkgs[i.pi];
+const cartCount=()=>cart.reduce((s,i)=>s+i.q,0);
+const cartTotal=()=>cart.reduce((s,i)=>s+gp(i).p*i.q,0);
+function updBadge(){
+  const n=cartCount(),b=$('cBadge'),d=$('drCnt');
+  b.textContent=n>99?'99+':n;b.classList.toggle('zero',!n);
+  d.textContent=n>99?'99+':n;d.classList.toggle('zero',!n);
+}
+function renderCart(){
+  const l=$('cList'),f=$('cFoot');
+  $('cSub').textContent=cart.length?cartCount()+' عنصر':'';
+  if(!cart.length){
+    l.innerHTML='<div class="cart-empty"><i class="bi bi-bag-x"></i>السلة فارغة<br><small>أضف باقات من صفحة الألعاب</small><button class="m-btn2" data-nav="games" style="margin-top:16px">تصفح الألعاب</button></div>';
+    f.classList.add('zero');return;
+  }
+  f.classList.remove('zero');
+  l.innerHTML=cart.map((it,i)=>{
+    const g=G.find(x=>x.id===it.gid),p=g.pkgs[it.pi];
+    return `<div class="ci" data-i="${i}">
+      <img src="${g.img||g._svgUri}" alt="" onerror="this.onerror=null;this.src=G.find(x=>x.id==='${g.id}')._svgUri"/>
+      <div class="ci-b"><strong>${g.name}</strong><small>${p.l} · ID: ${esc(it.pid)}</small><div class="ci-p">${fmt(p.p*it.q)}</div></div>
+      <div class="ci-side">
+        <div class="qty"><button data-a="inc" aria-label="زيادة">+</button><span>${it.q}</span><button data-a="dec" aria-label="إنقاص">−</button></div>
+        <button class="ci-del" data-a="del" aria-label="حذف"><i class="bi bi-trash3-fill"></i></button>
+      </div></div>`;
+  }).join('');
+  $('cTot').textContent=fmt(cartTotal());
+}
+function openCart(){renderCart();openLayer('cBd')}
+$('cList').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-a]');if(!b)return;
+  const row=b.closest('.ci');if(!row)return;
+  const i=+row.dataset.i,it=cart[i];if(!it)return;
+  const a=b.dataset.a;
+  if(a==='inc')it.q=Math.min(20,it.q+1);
+  else if(a==='dec'){it.q--;if(it.q<1)cart.splice(i,1)}
+  else cart.splice(i,1);
+  saveCart();updBadge();renderCart();
+});
+$('cClear').addEventListener('click',()=>{
+  if(!confirm('تفريغ السلة؟'))return;
+  cart=[];saveCart();updBadge();renderCart();
+});
+
+/* ─── رسالة واتساب ─── */
+function orderMsg(items){
+  const lines=items.map((it,i)=>{
+    const g=G.find(x=>x.id===it.gid),p=g.pkgs[it.pi];
+    return `${items.length>1?(i+1)+') ':''}🎮 اللعبة: ${g.name}\n📦 الباقة: ${p.l}${it.q>1?' × '+it.q:''}\n🆔 الحساب: ${it.pid}\n💰 السعر: ${fmt(p.p*it.q)}`;
+  }).join('\n\n');
+  const tot=items.reduce((s,it)=>s+G.find(x=>x.id===it.gid).pkgs[it.pi].p*it.q,0);
+  return `مرحبًا NEXORA، أريد طلب شحن:\n\n${lines}\n\n${items.length>1?'💳 الإجمالي: '+fmt(tot)+'\n\n':''}بانتظار تفاصيل الدفع والتأكيد.`;
+}
+const sendWA=items=>window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(orderMsg(items)),'_blank','noopener');
+$('cSend').addEventListener('click',()=>{if(cart.length)sendWA(cart)});
+
+/* ─── نافذة الشحن ─── */
+function openM(id){
+  active=G.find(g=>g.id===id);if(!active)return;
+  const m=ID_META[active.id]||{};
+  const mi=$('mImg');
+  mi.onerror=()=>{mi.onerror=null;mi.src=active._svgUri};
+  mi.src=active.img||active._svgUri;
+  $('mName').textContent=active.name;
+  $('mCat').textContent=active.cl;
+  $('mLbl').textContent=m.lbl||'Player ID';
+  const pid=$('mPid');
+  pid.value='';pid.placeholder=m.ph||'مثال: 123456789';pid.inputMode=m.n?'numeric':'text';
+  $('mPkgs').innerHTML=active.pkgs.map((p,i)=>`
+    <div class="pkg"><input type="radio" name="pkg" id="p${i}" value="${i}" ${i===0?'checked':''}>
+    <label class="pkg-lbl" for="p${i}"><strong>${p.l}</strong><small>${fmt(p.p)}</small></label></div>`).join('');
+  $('mErr').classList.remove('on');
+  updTot();
+  openLayer('mBd');
+}
+function updTot(){const c=document.querySelector('input[name="pkg"]:checked');if(c&&active)$('mTot').textContent=fmt(active.pkgs[+c.value].p)}
+$('mPkgs').addEventListener('change',updTot);
+function readOrder(){
+  const c=document.querySelector('input[name="pkg"]:checked');
+  const m=ID_META[active.id]||{};
+  const lbl=m.lbl||'Player ID';
+  const pid=normPid($('mPid').value);
+  const err=$('mErr');
+  let msg='';
+  if(!c)msg='اختر باقة أولًا';
+  else if(m.n?!/^\d{5,}$/.test(pid):pid.length<3)msg=m.n?`أدخل ${lbl} بالأرقام فقط`:`أدخل ${lbl} صحيحًا`;
+  if(msg){err.textContent=msg;err.classList.add('on');return null}
+  err.classList.remove('on');
+  return {gid:active.id,pi:+c.value,pid,q:1};
+}
+$('mSub').addEventListener('click',()=>{const o=readOrder();if(o)sendWA([o])});
+$('mAdd').addEventListener('click',()=>{
+  const o=readOrder();if(!o)return;
+  const ex=cart.find(i=>i.gid===o.gid&&i.pi===o.pi&&i.pid===o.pid);
+  if(ex)ex.q=Math.min(20,ex.q+1);else cart.push(o);
+  saveCart();updBadge();
+  closeLayer(()=>toast('تمت الإضافة إلى السلة 🛒'));
+});
+
+/* ─── روابط واتساب ─── */
+const waUrl=`https://wa.me/${WA}`;
+['waF','waBnC','waBnI','drWa','hWa'].forEach(id=>{const el=$(id);el.href=waUrl;el.target='_blank';el.rel='noopener'});
+
+updBadge();
+renderHome();
+renderGames();
+</script>
+</body>
+</html>
