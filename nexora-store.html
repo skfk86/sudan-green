@@ -238,7 +238,29 @@
     @media(min-width:640px){.g-grid{grid-template-columns:repeat(4,1fr)}}
     @media(min-width:900px){body{padding-bottom:0}.bnav{display:none}.g-grid{grid-template-columns:repeat(5,1fr)}.hero,.promo{margin-left:32px;margin-right:32px}.g-grid,.sec-hd,.cat-bar,.trust,.how{padding-left:32px;padding-right:32px}.s-hdr{padding-left:32px;padding-right:32px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-  </style>
+  
+/* ═ تحسينات التصميم ═ */
+.hero{position:relative;overflow:hidden}
+.hero-ico,.hero-ico2{position:absolute;color:var(--bs-primary,#7c5cff);opacity:.1;pointer-events:none}
+.hero-ico{font-size:12rem;left:4%;top:8%;transform:rotate(-14deg)}
+.hero-ico2{font-size:6rem;right:6%;bottom:6%;transform:rotate(12deg)}
+.promo-icon{display:grid;place-items:center}
+.promo-icon i{font-size:1.9rem}
+.pill{display:inline-flex;align-items:center;gap:.4rem;transition:.2s}
+.pill:hover{transform:translateY(-1px)}
+.g-hot{display:inline-flex;align-items:center;gap:.25rem}
+.g-nx{display:inline-grid;place-items:center}
+.pkg-lbl{position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;transition:.2s}
+.pkg-ic{font-size:1.3rem;opacity:.85}
+.pkg-ck{position:absolute;top:6px;left:6px;font-size:.9rem;color:#22c55e;opacity:0;transform:scale(.5);transition:.2s}
+input:checked+.pkg-lbl{box-shadow:0 0 0 2px #7c5cff,0 8px 24px rgba(124,92,255,.25)}
+input:checked+.pkg-lbl .pkg-ck{opacity:1;transform:scale(1)}
+.pkg-lbl:hover{transform:translateY(-2px)}
+#toast i{color:#22c55e;vertical-align:-2px}
+.ftr-wa{display:inline-flex;align-items:center;gap:.4rem;margin-top:.6rem;padding:.5rem 1rem;border-radius:999px;background:#25d366;color:#fff;text-decoration:none;font-weight:700}
+.ftr-wa:hover{filter:brightness(1.08);color:#fff}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #7c5cff;outline-offset:2px}
+</style>
 </head>
 <body>
 
@@ -251,6 +273,8 @@
 <section class="view on" id="v-home">
 <div class="hero">
   <div class="hero-dots"></div>
+  <i class="bi bi-controller hero-ico" aria-hidden="true"></i>
+  <i class="bi bi-gem hero-ico2" aria-hidden="true"></i>
   <div class="hero-txt">
     <h1>اشحن <span>جميع</span><br/>ألعابك من<br/>مكان واحد</h1>
     <p>سريع · آمن · عبر واتساب</p>
@@ -267,14 +291,14 @@
 
 <div class="promo purple">
   <div><h3>الشحن بال ID</h3><p>اشحن حسابك بال Player ID بسهولة</p></div>
-  <div class="promo-icon">🎮</div>
+  <div class="promo-icon"><i class="bi bi-controller"></i></div>
 </div>
 
 <div class="cat-bar" id="pills1">
-  <button class="pill active" data-f="all">الكل</button>
-  <button class="pill" data-f="popular">🔥 الأكثر طلبًا</button>
-  <button class="pill" data-f="mobile">📱 موبايل</button>
-  <button class="pill" data-f="pc">💻 كمبيوتر</button>
+  <button class="pill active" data-f="all"><i class="bi bi-grid-fill"></i> الكل</button>
+  <button class="pill" data-f="popular"><i class="bi bi-fire"></i> الأكثر طلبًا</button>
+  <button class="pill" data-f="mobile"><i class="bi bi-phone-fill"></i> ألعاب الموبايل</button>
+  <button class="pill" data-f="cards"><i class="bi bi-credit-card-2-front-fill"></i> بطاقات رقمية</button>
 </div>
 
 <div class="sec-hd"><h2>الألعاب المتاحة</h2><button class="see-all" data-nav="games">عرض الكل</button></div>
@@ -282,7 +306,7 @@
 
 <div class="promo pink">
   <div><h3>الشحن عبر واتساب</h3><p>اشحن حسابك والعب بلا حدود</p></div>
-  <div class="promo-icon">💬</div>
+  <div class="promo-icon"><i class="bi bi-whatsapp"></i></div>
 </div>
 
 <div class="sec-hd" style="margin-top:8px"><h2>كيف يعمل NEXORA؟</h2></div>
@@ -300,10 +324,10 @@
   <p class="pg-sub">اختر لعبتك ثم الباقة وأرسل الطلب عبر واتساب</p>
   <div class="search"><i class="bi bi-search"></i><input id="gSearch" type="search" placeholder="ابحث عن لعبة…" autocomplete="off"/></div>
   <div class="cat-bar" id="pills2">
-    <button class="pill active" data-f="all">الكل</button>
-    <button class="pill" data-f="popular">🔥 الأكثر طلبًا</button>
-    <button class="pill" data-f="mobile">📱 موبايل</button>
-    <button class="pill" data-f="pc">💻 كمبيوتر</button>
+    <button class="pill active" data-f="all"><i class="bi bi-grid-fill"></i> الكل</button>
+    <button class="pill" data-f="popular"><i class="bi bi-fire"></i> الأكثر طلبًا</button>
+    <button class="pill" data-f="mobile"><i class="bi bi-phone-fill"></i> ألعاب الموبايل</button>
+    <button class="pill" data-f="cards"><i class="bi bi-credit-card-2-front-fill"></i> بطاقات رقمية</button>
   </div>
   <div class="g-grid" id="gGrid2"></div>
 </section>
@@ -316,9 +340,11 @@
     <div class="faq-i on"><button class="faq-q">كيف أطلب شحن؟<i class="bi bi-chevron-down"></i></button>
       <div class="faq-a">اختر اللعبة ثم الباقة، وأدخل Player ID، واضغط «اطلب الآن عبر واتساب». ستفتح رسالة جاهزة بكل التفاصيل، أرسلها لنا مباشرة. وللطلب أكثر من باقة استخدم السلة وأرسلها دفعة واحدة.</div></div>
     <div class="faq-i"><button class="faq-q">أين أجد Player ID؟<i class="bi bi-chevron-down"></i></button>
-      <div class="faq-a">يظهر داخل اللعبة في صفحة الملف الشخصي (Profile). في موبايل ليجند أدخل ID مع رقم Zone، وفي فالورانت أدخل Riot ID بصيغة الاسم#TAG، وفي روبلوكس اسم المستخدم.</div></div>
+      <div class="faq-a">يظهر داخل اللعبة في صفحة الملف الشخصي (Profile). في موبايل ليجند أدخل ID مع رقم Zone، وفي كلاش أوف كلانس وكلاش رويال وبراول ستارز أدخل Player Tag (يبدأ بعلامة #).</div></div>
     <div class="faq-i"><button class="faq-q">هل تطلبون كلمة المرور؟<i class="bi bi-chevron-down"></i></button>
       <div class="faq-a">لا. نحتاج Player ID فقط. لا تشارك كلمة مرور حسابك مع أي أحد.</div></div>
+    <div class="faq-i"><button class="faq-q">كيف أستلم بطاقات PSN وآيتونز وماستركارد؟<i class="bi bi-chevron-down"></i></button>
+      <div class="faq-a">بعد تأكيد الدفع يصلك الكود على واتساب. في بطاقات PSN اختر الدولة الصحيحة (أمريكي أو إماراتي أو سعودي) لأن البطاقة تعمل فقط مع حساب نفس الدولة.</div></div>
     <div class="faq-i"><button class="faq-q">كيف أدفع؟<i class="bi bi-chevron-down"></i></button>
       <div class="faq-a">بعد وصول طلبك على واتساب يرسل لك المشرف تفاصيل الدفع، وبعد تأكيد الدفع ينفذ الشحن.</div></div>
     <div class="faq-i"><button class="faq-q">كم يستغرق الشحن؟<i class="bi bi-chevron-down"></i></button>
@@ -336,6 +362,7 @@
 <footer class="s-ftr">
   <div class="flogo">NEX<span>ORA</span> Store</div>
   <p>شحن الألعاب بسرعة وأمان عبر واتساب</p>
+  <a class="ftr-wa" id="ftWa" href="#"><i class="bi bi-whatsapp"></i> تواصل معنا على واتساب</a>
   <p style="margin-top:5px">© 2026 NEXORA. جميع الحقوق محفوظة.</p>
 </footer>
 
@@ -355,7 +382,7 @@
     <div class="m-err" id="mErr"></div>
     <button class="wa-btn" id="mSub"><i class="bi bi-whatsapp" style="font-size:1.3rem"></i> اطلب الآن عبر واتساب</button>
     <button class="m-btn2" id="mAdd"><i class="bi bi-bag-plus-fill"></i> أضف إلى السلة</button>
-    <div class="m-note"><i class="bi bi-lock-fill"></i> لا نطلب كلمة المرور — الدفع عبر واتساب</div>
+    <div class="m-note"><i class="bi bi-lock-fill"></i> <span id="mNote">لا نطلب كلمة المرور — الدفع عبر واتساب</span></div>
   </div>
 </div>
 
@@ -382,7 +409,7 @@
     <p class="dr-sep">التصنيفات</p>
     <button class="dr-i" data-go="popular"><i class="bi bi-fire"></i>الأكثر طلبًا</button>
     <button class="dr-i" data-go="mobile"><i class="bi bi-phone-fill"></i>ألعاب الموبايل</button>
-    <button class="dr-i" data-go="pc"><i class="bi bi-pc-display"></i>ألعاب الكمبيوتر</button>
+    <button class="dr-i" data-go="cards"><i class="bi bi-credit-card-2-front-fill"></i>البطاقات الرقمية</button>
     <p class="dr-sep">تواصل</p>
     <a class="dr-i" id="drWa" href="#"><i class="bi bi-whatsapp"></i>تواصل عبر واتساب</a>
     <div class="dr-ft">© 2026 NEXORA</div>
@@ -410,7 +437,7 @@
 
 
 <script>
-const WA='249901758765';
+const WA='249901758663';
 const fmt=v=>`${Number(v).toLocaleString('en-US')} ج.س`;
 let active=null;
 
@@ -456,7 +483,7 @@ const G=[
              <ellipse cx="50" cy="200" rx="70" ry="40" fill="#ff2200" opacity=".12"/>
              <rect x="0" y="185" width="240" height="4" fill="#ff4400" opacity=".3"/>`},
    img:'',
-   pkgs:[{l:'100 💎',p:3500},{l:'310 💎',p:9500},{l:'520 💎',p:15000},{l:'1060 💎',p:28000},{l:'2180 💎',p:55000},{l:'Weekly Pass',p:12000}]},
+   pkgs:[{l:'110 جوهرة',c:9000},{l:'231 جوهرة',c:18000},{l:'583 جوهرة',c:45000},{l:'1180 جوهرة',c:90000},{l:'2420 جوهرة',c:180000},{l:'العضوية الأسبوعية',c:19800},{l:'العضوية الشهرية',c:99000},{l:'باقة رفع المستوى 6',c:3150},{l:'باقة رفع المستوى 10',c:5400},{l:'باقة رفع المستوى 15',c:5400},{l:'باقة رفع المستوى 20',c:5400},{l:'باقة رفع المستوى 25',c:5400},{l:'باقة رفع المستوى 30',c:8280},{l:'بويا باس',c:31086}]},
 
   /* ═ PUBG Mobile ═ */
   {id:'pubg',name:'ببجي موبايل',cat:'mobile',hot:true,cl:'موبايل · أكشن',
@@ -464,7 +491,7 @@ const G=[
      shapes:`<circle cx="180" cy="45" r="45" fill="#ffaa00" opacity=".2"/>
              <rect x="0" y="195" width="240" height="45" fill="#3d2600" opacity=".5"/>`},
    img:'https://files.manuscdn.com/search-media/310419663031174812/4bFuX7zg8XtPNVrg7HmfjK/ZeGG86id5iBhEkRrVHkg9c.jpg',
-   pkgs:[{l:'60 UC',p:4500},{l:'325 UC',p:15000},{l:'660 UC',p:28000},{l:'1800 UC',p:72000},{l:'3850 UC',p:148000},{l:'Royale Pass',p:22000}]},
+   pkgs:[{l:'10 UC',c:2250},{l:'60 UC',c:8550},{l:'325 UC',c:42750},{l:'660 UC',c:85500},{l:'1800 UC',c:213750},{l:'3850 UC',c:427500},{l:'8100 UC',c:855000},{l:'16200 UC',c:1710000},{l:'Elite Pass 1-50',c:47520},{l:'Elite Pass 1-100',c:94500},{l:'Elite Pass Plus 1-100',c:237600},{l:'برايم — شهر واحد',c:9000},{l:'برايم بلس — شهر واحد',c:90000},{l:'حزمة مواد الأسلحة القابلة للترقية',c:27000},{l:'حزمة الشعار الأسطوري الأسبوعية',c:45000},{l:'حزمة الشعار الأسطوري',c:27000},{l:'حزمة العروض الأسبوعية 1',c:9000},{l:'حزمة العروض الأسبوعية 2',c:27000},{l:'حزمة الشراء الأولى',c:9000}]},
 
   /* ═ Mobile Legends ═ */
   {id:'mlbb',name:'موبايل ليجند',cat:'mobile',hot:true,cl:'موبايل · MOBA',
@@ -472,25 +499,7 @@ const G=[
      shapes:`<polygon points="120,10 220,70 220,170 120,230 20,170 20,70" fill="none" stroke="#4fc3f7" stroke-width="1" opacity=".25"/>
              <circle cx="120" cy="120" r="80" fill="none" stroke="#2a7fff" stroke-width="1" opacity=".2"/>`},
    img:'https://files.manuscdn.com/search-media/310419663031174812/4bFuX7zg8XtPNVrg7HmfjK/sZAmZE4zXkxu5P77zuk48i.webp',
-   pkgs:[{l:'86 💎',p:4500},{l:'172 💎',p:8500},{l:'257 💎',p:12000},{l:'706 💎',p:30000},{l:'2195 💎',p:85000},{l:'Weekly Pass',p:13000}]},
-
-  /* ═ Valorant ═ */
-  {id:'valorant',name:'فالورانت',cat:'pc',hot:true,cl:'كمبيوتر · تنافسي',
-   svgCfg:{c1:'#050000',c2:'#6a0010',c3:'#ff1235',label1:'VALO',label2:'RANT',l1color:'#ff4655',l2color:'#fff',
-     shapes:`<line x1="0" y1="120" x2="240" y2="120" stroke="#ff1235" stroke-width="1" opacity=".35"/>
-             <polygon points="120,20 200,120 120,220 40,120" fill="none" stroke="#ff4655" stroke-width="1" opacity=".2"/>
-             <circle cx="120" cy="120" r="10" fill="#ff4655" opacity=".7"/>`},
-   img:'https://files.manuscdn.com/search-media/310419663031174812/4bFuX7zg8XtPNVrg7HmfjK/RnHJ6pEz4btKz5dLhc7NuF.jpg',
-   pkgs:[{l:'475 VP',p:14000},{l:'1000 VP',p:28000},{l:'2050 VP',p:55000},{l:'3650 VP',p:95000},{l:'5350 VP',p:138000},{l:'11000 VP',p:275000}]},
-
-  /* ═ Genshin Impact ═ */
-  {id:'genshin',name:'جينشن إمباكت',cat:'mobile',hot:false,cl:'موبايل · RPG',
-   svgCfg:{c1:'#000510',c2:'#0d3f80',c3:'#1a7ab0',label1:'GENSHIN',label2:'IMPACT',l1color:'#4fc3f7',l2color:'#ffd700',
-     shapes:`<circle cx="120" cy="120" r="90" fill="none" stroke="#4fc3f7" stroke-width="1" opacity=".18"/>
-             <path d="M120 30 L200 120 L120 210 L40 120 Z" fill="none" stroke="#ffd700" stroke-width="1" opacity=".2"/>
-             <circle cx="120" cy="120" r="12" fill="#ffd700" opacity=".5"/>`},
-   img:'https://files.manuscdn.com/search-media/310419663031174812/4bFuX7zg8XtPNVrg7HmfjK/6FkMw5z7ga6nLhLDzyZEdZ.jpg',
-   pkgs:[{l:'60 Crystal',p:5000},{l:'300+30',p:18000},{l:'980+110',p:45000},{l:'1980+260',p:85000},{l:'3280+600',p:135000},{l:'6480+1600',p:265000}]},
+   pkgs:[{l:'278 جوهرة',c:49500},{l:'571 جوهرة',c:99000},{l:'1192 جوهرة',c:198000}]},
 
   /* ═ EA FC Mobile ═ */
   {id:'eafc',name:'EA FC موبايل',cat:'mobile',hot:false,cl:'موبايل · رياضة',
@@ -499,7 +508,7 @@ const G=[
              <line x1="120" y1="25" x2="120" y2="215" stroke="#00c853" stroke-width="1" opacity=".2"/>
              <path d="M25,120 Q75,60 120,55 Q165,60 215,120" fill="none" stroke="#00c853" stroke-width="1" opacity=".2"/>`},
    img:'',
-   pkgs:[{l:'105 Points',p:5500},{l:'575 Points',p:20000},{l:'1200 Points',p:40000},{l:'2500 Points',p:78000},{l:'5200 Points',p:155000},{l:'Star Pass',p:28000}]},
+   pkgs:[{l:'520 Points',c:51750},{l:'1070 Points',c:103500},{l:'2200 Points',c:207000},{l:'5750 Points',c:517500},{l:'12000 Points',c:1035000},{l:'حزمة الدوري 1',c:103500},{l:'تصريح النجم المتميز',c:103500},{l:'باقة تصريح النجم المتميز',c:207000}]},
 
   /* ═ Clash of Clans ═ */
   {id:'coc',name:'كلاش أوف كلانس',cat:'mobile',hot:true,cl:'موبايل · استراتيجي',
@@ -509,17 +518,7 @@ const G=[
              <rect x="125" y="20" width="20" height="30" rx="2" fill="none" stroke="#ffd700" stroke-width="1.5" opacity=".3"/>
              <rect x="65" y="140" width="110" height="12" rx="2" fill="#e87800" opacity=".35"/>`},
    img:'',
-   pkgs:[{l:'80 💎',p:4000},{l:'500 💎',p:22000},{l:'1200 💎',p:50000},{l:'2500 💎',p:98000},{l:'6500 💎',p:245000},{l:'14000 💎',p:490000}]},
-
-  /* ═ Roblox ═ */
-  {id:'roblox',name:'روبلوكس',cat:'mobile',hot:true,cl:'موبايل / PC · مفتوح',
-   svgCfg:{c1:'#0d0000',c2:'#7a0000',c3:'#cc0000',label1:'ROBLOX',l1color:'#fff',
-     shapes:`<rect x="60" y="60" width="50" height="50" rx="6" fill="#cc0000" opacity=".35"/>
-             <rect x="130" y="60" width="50" height="50" rx="6" fill="#cc0000" opacity=".25"/>
-             <rect x="60" y="130" width="50" height="50" rx="6" fill="#cc0000" opacity=".25"/>
-             <rect x="130" y="130" width="50" height="50" rx="6" fill="#cc0000" opacity=".35"/>`},
-   img:'',
-   pkgs:[{l:'400 Robux',p:7000},{l:'800 Robux',p:13000},{l:'1700 Robux',p:25000},{l:'4500 Robux',p:62000},{l:'10000 Robux',p:135000},{l:'22500 Robux',p:290000}]},
+   pkgs:[{l:'500 جوهرة',c:49500},{l:'1200 جوهرة',c:99000},{l:'2500 جوهرة',c:198000},{l:'6500 جوهرة',c:495000},{l:'التذكرة الذهبية (أول مرة)',c:18000},{l:'التذكرة الذهبية',c:51750},{l:'تذكرة الحدث المصغرة',c:18000},{l:'تذكرة الحدث',c:51750},{l:'مظهر الملك',c:45000},{l:'المنظر',c:51750},{l:'الملك المتجمد',c:103500},{l:'منتظر عصر الصقيع',c:103500}]},
 
   /* ═ Call of Duty Mobile ═ */
   {id:'codm',name:'كود موبايل',cat:'mobile',hot:false,cl:'موبايل · أكشن',
@@ -530,7 +529,7 @@ const G=[
              <circle cx="120" cy="120" r="30" fill="none" stroke="#8bc34a" stroke-width="1.5" opacity=".3"/>
              <circle cx="120" cy="120" r="4" fill="#8bc34a" opacity=".6"/>`},
    img:'',
-   pkgs:[{l:'80 CP',p:4000},{l:'400 CP',p:18000},{l:'800 CP',p:34000},{l:'2000 CP',p:82000},{l:'5000 CP',p:198000},{l:'Battle Pass',p:20000}]},
+   pkgs:[{l:'420 CP',c:49500},{l:'880 CP',c:99000},{l:'2400 CP',c:247500},{l:'5000 CP',c:495000},{l:'10800 CP',c:990000}]},
 
   /* ═ Blood Strike ═ */
   {id:'bs',name:'بلود ستراك',cat:'mobile',hot:false,cl:'موبايل · باتل رويال',
@@ -540,8 +539,85 @@ const G=[
              <line x1="120" y1="35" x2="120" y2="205" stroke="#00d4ff" stroke-width="1" opacity=".2"/>
              <line x1="35" y1="120" x2="205" y2="120" stroke="#00d4ff" stroke-width="1" opacity=".2"/>`},
    img:'',
-   pkgs:[{l:'60 BC',p:3000},{l:'300 BC',p:13000},{l:'980 BC',p:40000},{l:'1980 BC',p:78000},{l:'3280 BC',p:125000},{l:'Season Pass',p:16000}]},
+   pkgs:[{l:'105 ذهب',c:9000},{l:'320 ذهب',c:27000},{l:'540 ذهب',c:36000},{l:'Strike Pass',c:36000},{l:'1100 ذهب',c:72000},{l:'Strike Alien',c:72000},{l:'5800 ذهب',c:360000}]},
+
+  /* ═ Brawl Stars ═ */
+  {id:'brawl',name:'براول ستارز',cat:'mobile',hot:false,cl:'موبايل · أكشن',
+   svgCfg:{c1:'#0a0600',c2:'#7a5200',c3:'#ffb800',label1:'BRAWL',label2:'STARS',l1color:'#ffd23f',l2color:'#fff',
+     shapes:`<polygon points="120,20 140,90 210,90 152,130 174,200 120,160 66,200 88,130 30,90 100,90" fill="none" stroke="#ffd23f" stroke-width="1.5" opacity=".28"/>`},
+   img:'',
+   pkgs:[{l:'80+8 جوهرة',c:49500},{l:'براول باس',c:69300},{l:'170+17 جوهرة',c:99000},{l:'براول باس بلس',c:99000},{l:'360+36 جوهرة',c:198000},{l:'برو باس',c:243000},{l:'950+95 جوهرة',c:495000}]},
+
+  /* ═ Clash Royale ═ */
+  {id:'cr',name:'كلاش رويال',cat:'mobile',hot:false,cl:'موبايل · استراتيجي',
+   svgCfg:{c1:'#02081a',c2:'#10307a',c3:'#6a3bd1',label1:'CLASH',label2:'ROYALE',l1color:'#7cc4ff',l2color:'#ffd700',
+     shapes:`<polyline points="60,150 78,80 104,120 120,66 136,120 162,80 180,150 Z" fill="none" stroke="#ffd700" stroke-width="1.5" opacity=".3"/>
+             <rect x="60" y="150" width="120" height="12" rx="3" fill="#ffd700" opacity=".25"/>`},
+   img:'',
+   pkgs:[{l:'500+50 جوهرة',c:49500},{l:'1200+120 جوهرة',c:99000},{l:'دايموند باس',c:121500},{l:'2500+250 جوهرة',c:198000},{l:'6500+650 جوهرة',c:495000}]},
+
+  /* ═ Yalla Ludo ═ */
+  {id:'ludo',name:'يلا لودو',cat:'mobile',hot:true,cl:'موبايل · ألعاب جماعية',
+   svgCfg:{c1:'#001410',c2:'#006b4f',c3:'#00c389',label1:'YALLA',label2:'LUDO',l1color:'#7dffd0',l2color:'#fff',
+     shapes:`<rect x="70" y="40" width="100" height="100" rx="16" fill="none" stroke="#7dffd0" stroke-width="1.5" opacity=".3"/>
+             <circle cx="95" cy="65" r="7" fill="#7dffd0" opacity=".35"/><circle cx="120" cy="90" r="7" fill="#7dffd0" opacity=".35"/><circle cx="145" cy="115" r="7" fill="#7dffd0" opacity=".35"/>`},
+   img:'',
+   pkgs:[{l:'830 جوهرة',c:18000},{l:'2333 جوهرة',c:45000},{l:'5150 جوهرة',c:90000}]},
+
+  /* ═ eFootball ═ */
+  {id:'efb',name:'إي فوتبول',cat:'mobile',hot:false,cl:'موبايل · رياضة',
+   svgCfg:{c1:'#00040f',c2:'#0a2a66',c3:'#1769ff',label1:'eFOOT',label2:'BALL',l1color:'#7fb2ff',l2color:'#fff',
+     shapes:`<circle cx="120" cy="120" r="88" fill="none" stroke="#4d8dff" stroke-width="1.5" opacity=".25"/>
+             <circle cx="120" cy="120" r="30" fill="none" stroke="#4d8dff" stroke-width="1" opacity=".25"/>
+             <line x1="120" y1="32" x2="120" y2="208" stroke="#4d8dff" stroke-width="1" opacity=".2"/>`},
+   img:'',
+   pkgs:[{l:'حزمة الشخصيات + 150 كوينز',c:43200},{l:'550 كوينز',c:49500},{l:'مجموعة مورينيو',c:51750},{l:'750 كوينز',c:67500},{l:'1040 كوينز',c:91350},{l:'2130 كوينز',c:178200},{l:'3250 كوينز',c:267300},{l:'5700 كوينز',c:445500},{l:'12800 كوينز',c:945000}]},
+
+  /* ═ Razer Gold ═ */
+  {id:'razer',name:'ريزر جولد',cat:'cards',hot:false,cl:'بطاقة رقمية · كل الألعاب',
+   svgCfg:{c1:'#000a00',c2:'#0a3d0a',c3:'#16b816',label1:'RAZER',label2:'GOLD',l1color:'#44ff44',l2color:'#ffd700',
+     shapes:`<circle cx="120" cy="60" r="38" fill="none" stroke="#ffd700" stroke-width="2" opacity=".3"/>
+             <circle cx="120" cy="60" r="26" fill="none" stroke="#ffd700" stroke-width="1" opacity=".25"/>`},
+   img:'',
+   pkgs:[{l:'بطاقة $5',c:45000},{l:'بطاقة $10',c:90000},{l:'بطاقة $50',c:450000},{l:'بطاقة $100',c:882000}]},
+
+  /* ═ بلايستيشن PSN ═ */
+  {id:'psn',name:'بلايستيشن PSN',cat:'cards',hot:true,cl:'بطاقة رقمية · بلايستيشن',
+   svgCfg:{c1:'#00040f',c2:'#00379a',c3:'#0a74da',label1:'PSN',label2:'CARD',l1color:'#7cc4ff',l2color:'#ffffff',
+     shapes:`<rect x="40" y="46" width="160" height="100" rx="14" fill="none" stroke="#7cc4ff" stroke-width="1.5" opacity=".3"/><rect x="40" y="72" width="160" height="16" fill="#7cc4ff" opacity=".14"/>`},
+   img:'',
+   pkgs:[{l:'$10 أمريكي',c:99000},{l:'$20 أمريكي',c:189000},{l:'$50 أمريكي',c:468000},{l:'$10 إماراتي',c:99000},{l:'$20 إماراتي',c:198000},{l:'$50 إماراتي',c:495000},{l:'$10 سعودي',c:99000},{l:'$20 سعودي',c:198000},{l:'$50 سعودي',c:495000}]},
+
+  /* ═ بطاقات آيتونز ═ */
+  {id:'itunes',name:'بطاقات آيتونز',cat:'cards',hot:false,cl:'بطاقة رقمية · متجر آبل',
+   svgCfg:{c1:'#12000f',c2:'#8a1a6b',c3:'#ff4fa3',label1:'iTUNES',label2:'CARD',l1color:'#ff9ad0',l2color:'#ffffff',
+     shapes:`<rect x="40" y="46" width="160" height="100" rx="14" fill="none" stroke="#ff9ad0" stroke-width="1.5" opacity=".3"/><rect x="40" y="72" width="160" height="16" fill="#ff9ad0" opacity=".14"/>`},
+   img:'',
+   pkgs:[{l:'بطاقة $2',c:19800},{l:'بطاقة $3',c:29700},{l:'بطاقة $5',c:49500},{l:'بطاقة $10',c:99000},{l:'بطاقة $50',c:495000},{l:'بطاقة $100',c:990000}]},
+
+  /* ═ ماستركارد افتراضية ═ */
+  {id:'mc',name:'ماستركارد افتراضية',cat:'cards',hot:true,cl:'بطاقة دفع افتراضية',
+   svgCfg:{c1:'#0a0200',c2:'#7a1d00',c3:'#ff6a00',label1:'VIRTUAL',label2:'CARD',l1color:'#ffb066',l2color:'#ffffff',
+     shapes:`<rect x="40" y="46" width="160" height="100" rx="14" fill="none" stroke="#ffb066" stroke-width="1.5" opacity=".3"/><rect x="40" y="72" width="160" height="16" fill="#ffb066" opacity=".14"/>`},
+   img:'',
+   pkgs:[{l:'بطاقة $5',c:52200},{l:'بطاقة $10',c:103500},{l:'بطاقة $20',c:198000},{l:'بطاقة $50',c:495000},{l:'بطاقة $100',c:990000}]},
+
+  /* ═ بطاقات فري فاير ═ */
+  {id:'ffpin',name:'بطاقات فري فاير',cat:'cards',hot:true,cl:'بطاقة · كود شحن',
+   svgCfg:{c1:'#0a0000',c2:'#a02000',c3:'#ff5500',label1:'FF',label2:'PIN CARD',l1color:'#ff6600',l2color:'#ffcc00',
+     shapes:`<rect x="40" y="46" width="160" height="100" rx="14" fill="none" stroke="#ff6600" stroke-width="1.5" opacity=".3"/><rect x="40" y="72" width="160" height="16" fill="#ff6600" opacity=".14"/>`},
+   img:'',
+   pkgs:[{l:'110 جوهرة',c:8910},{l:'231 جوهرة',c:17820},{l:'583 جوهرة',c:44550},{l:'1180 جوهرة',c:89100},{l:'2420 جوهرة',c:178200},{l:'شاحنة الوحش — أغطية قطنية',c:54000}]},
 ];
+
+
+/* ─── التسعير: سعر التكلفة (c) + هامش ربح ───
+   الهامش = الأكبر بين النسبة والحد الأدنى، ثم تقريب لأعلى لأقرب 50.
+   غيّر الرقمين التاليين فقط لتعديل الأرباح في كل المتجر. */
+const MARGIN_PCT=0.05;   /* 5% */
+const MARGIN_MIN=500;    /* لا يقل الربح عن 500 ج.س */
+const price=c=>Math.ceil((c+Math.max(MARGIN_MIN,c*MARGIN_PCT))/50)*50;
+G.forEach(g=>g.pkgs.forEach(k=>{if(k.c!=null)k.p=price(k.c)}));
 
 /* ─── توليد data-URI للـ SVG ─── */
 G.forEach(g=>{g._svgUri=makeSVG(g.svgCfg);});
@@ -549,6 +625,14 @@ G.forEach(g=>{g._svgUri=makeSVG(g.svgCfg);});
 /* ─── أدوات ─── */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $=id=>document.getElementById(id);
+function pkIcon(l){
+  if(/جوهرة/.test(l))return 'bi-gem';
+  if(/باس|Pass|تذكرة|تصريح|عضوية|برايم|بويا/.test(l))return 'bi-ticket-perforated-fill';
+  if(/حزمة|باقة|مجموعة/.test(l))return 'bi-box-seam-fill';
+  if(/\$/.test(l))return 'bi-credit-card-2-front-fill';
+  if(/UC|CP|Points|كوينز|ذهب/.test(l))return 'bi-coin';
+  return 'bi-stars';
+}
 const gameEn=g=>(g.svgCfg.label1+' '+(g.svgCfg.label2||'')).toLowerCase();
 
 /* ─── رندر الألعاب ─── */
@@ -561,8 +645,8 @@ function render(gridId,list){
         <img src="${g._svgUri}" alt="${g.name}" style="z-index:1"/>
         ${g.img?`<img src="${g.img}" alt="${g.name}" loading="lazy" onerror="this.remove()" style="z-index:2"/>`:''}
         <div class="g-over"></div>
-        <span class="g-nx">NX</span>
-        ${g.hot?'<span class="g-hot">🔥 شائع</span>':''}
+        <span class="g-nx"><i class="bi ${g.cat==='cards'?'bi-credit-card-2-front-fill':'bi-controller'}"></i></span>
+        ${g.hot?'<span class="g-hot"><i class="bi bi-fire"></i> شائع</span>':''}
       </div>
       <div class="g-foot">
         <div class="g-name">${g.name}</div>
@@ -636,15 +720,19 @@ document.querySelectorAll('.faq-q').forEach(b=>b.addEventListener('click',()=>b.
 
 /* ─── إشعار صغير ─── */
 let tt;
-function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
+function toast(m){const t=$('toast');t.innerHTML='<i class="bi bi-check-circle-fill"></i> '+esc(m);t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
 
 /* ─── بيانات حقل الحساب لكل لعبة ─── */
+const CARD={lbl:'رقم واتساب لاستلام الكود',ph:'مثال: 0901234567'};
 const ID_META={
-  freefire:{n:1},pubg:{n:1},genshin:{n:1},codm:{n:1},bs:{n:1},
+  freefire:{n:1},pubg:{n:1},codm:{n:1},bs:{n:1},
   mlbb:{lbl:'Player ID (Zone ID)',ph:'مثال: 123456789 (1234)'},
-  valorant:{lbl:'Riot ID',ph:'مثال: Name#1234'},
-  roblox:{lbl:'اسم المستخدم',ph:'اسم الحساب في روبلوكس'},
-  coc:{lbl:'Player Tag',ph:'مثال: #2PP0JCCL'}
+  coc:{lbl:'Player Tag',ph:'مثال: #2PP0JCCL'},
+  brawl:{lbl:'Player Tag',ph:'مثال: #2PP0JCCL'},
+  cr:{lbl:'Player Tag',ph:'مثال: #2PP0JCCL'},
+  ludo:{n:1},
+  efb:{lbl:'eFootball ID',ph:'معرّف اللاعب داخل اللعبة'},
+  razer:CARD,psn:CARD,itunes:CARD,mc:CARD,ffpin:CARD
 };
 const AR_DIGITS='٠١٢٣٤٥٦٧٨٩';
 const normPid=s=>s.trim().replace(/[٠-٩]/g,d=>AR_DIGITS.indexOf(d));
@@ -703,10 +791,10 @@ $('cClear').addEventListener('click',()=>{
 function orderMsg(items){
   const lines=items.map((it,i)=>{
     const g=G.find(x=>x.id===it.gid),p=g.pkgs[it.pi];
-    return `${items.length>1?(i+1)+') ':''}🎮 اللعبة: ${g.name}\n📦 الباقة: ${p.l}${it.q>1?' × '+it.q:''}\n🆔 الحساب: ${it.pid}\n💰 السعر: ${fmt(p.p*it.q)}`;
+    return `${items.length>1?(i+1)+') ':''}اللعبة: ${g.name}\nالباقة: ${p.l}${it.q>1?' × '+it.q:''}\n${(ID_META[g.id]&&ID_META[g.id].lbl)||'Player ID'}: ${it.pid}\nالسعر: ${fmt(p.p*it.q)}`;
   }).join('\n\n');
   const tot=items.reduce((s,it)=>s+G.find(x=>x.id===it.gid).pkgs[it.pi].p*it.q,0);
-  return `مرحبًا NEXORA، أريد طلب شحن:\n\n${lines}\n\n${items.length>1?'💳 الإجمالي: '+fmt(tot)+'\n\n':''}بانتظار تفاصيل الدفع والتأكيد.`;
+  return `مرحبًا NEXORA، أريد طلب شحن:\n\n${lines}\n\n${items.length>1?'الإجمالي: '+fmt(tot)+'\n\n':''}بانتظار تفاصيل الدفع والتأكيد.`;
 }
 const sendWA=items=>window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(orderMsg(items)),'_blank','noopener');
 $('cSend').addEventListener('click',()=>{if(cart.length)sendWA(cart)});
@@ -722,10 +810,11 @@ function openM(id){
   $('mCat').textContent=active.cl;
   $('mLbl').textContent=m.lbl||'Player ID';
   const pid=$('mPid');
-  pid.value='';pid.placeholder=m.ph||'مثال: 123456789';pid.inputMode=m.n?'numeric':'text';
+  pid.value='';pid.placeholder=m.ph||'مثال: 123456789';pid.inputMode=m.n?'numeric':(m===CARD?'tel':'text');
+  $('mNote').textContent=m===CARD?'يصلك الكود على واتساب بعد تأكيد الدفع':'لا نطلب كلمة المرور — الدفع عبر واتساب';
   $('mPkgs').innerHTML=active.pkgs.map((p,i)=>`
     <div class="pkg"><input type="radio" name="pkg" id="p${i}" value="${i}" ${i===0?'checked':''}>
-    <label class="pkg-lbl" for="p${i}"><strong>${p.l}</strong><small>${fmt(p.p)}</small></label></div>`).join('');
+    <label class="pkg-lbl" for="p${i}"><i class="bi ${pkIcon(p.l)} pkg-ic"></i><strong>${esc(p.l)}</strong><small>${fmt(p.p)}</small><i class="bi bi-check-circle-fill pkg-ck"></i></label></div>`).join('');
   $('mErr').classList.remove('on');
   updTot();
   openLayer('mBd');
@@ -751,12 +840,12 @@ $('mAdd').addEventListener('click',()=>{
   const ex=cart.find(i=>i.gid===o.gid&&i.pi===o.pi&&i.pid===o.pid);
   if(ex)ex.q=Math.min(20,ex.q+1);else cart.push(o);
   saveCart();updBadge();
-  closeLayer(()=>toast('تمت الإضافة إلى السلة 🛒'));
+  closeLayer(()=>toast('تمت الإضافة إلى السلة'));
 });
 
 /* ─── روابط واتساب ─── */
 const waUrl=`https://wa.me/${WA}`;
-['waF','waBnC','waBnI','drWa','hWa'].forEach(id=>{const el=$(id);el.href=waUrl;el.target='_blank';el.rel='noopener'});
+['waF','waBnC','waBnI','drWa','hWa','ftWa'].forEach(id=>{const el=$(id);el.href=waUrl;el.target='_blank';el.rel='noopener'});
 
 updBadge();
 renderHome();
