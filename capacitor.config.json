@@ -1,0 +1,10 @@
+{
+  "appId": "com.greensudan.app",
+  "appName": "السودان الأخضر",
+  "webDir": "www",
+  "server": { "androidScheme": "https" },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 1500, "backgroundColor": "#14301F", "showSpinner": false },
+    "StatusBar": { "style": "LIGHT", "backgroundColor": "#F5F2EA" }
+  }
+}
