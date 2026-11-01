@@ -32,3 +32,9 @@ cd android && ./gradlew assembleDebug
 
 - Authentication → Providers → Email: أوقف **Confirm email** أثناء التجربة إن أردت دخولًا فوريًا.
 - التحديات الأسبوعية لها تاريخ انتهاء؛ أضف تحديات جديدة في جدول `challenges` كل أسبوع.
+
+## التعرّف على الأشجار
+
+تعمل عبر الدالة `identify-tree` في Supabase، وتستخدم خدمة Pl@ntNet المجانية (500 طلب يوميًا).
+1. أنشئ حسابًا في https://my.plantnet.org واحصل على API key.
+2. في Supabase: Edge Functions → Secrets → أضف `PLANTNET_API_KEY`.

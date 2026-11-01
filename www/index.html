@@ -84,9 +84,14 @@ nav.tabs button.on{color:var(--green);font-weight:700}
 .sheet{position:absolute;left:0;right:0;bottom:0;z-index:500;background:#fff;border-radius:24px 24px 0 0;box-shadow:0 -6px 24px rgba(20,48,31,.12);padding:10px 20px 14px;max-height:46%;overflow-y:auto}
 .grab{width:40px;height:5px;border-radius:999px;background:var(--line);margin:0 auto 10px}
 .leaflet-container{font-family:inherit}
-.tree-pin{width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--green);border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-.marker-cluster div{background:var(--green)!important;color:#fff;font-weight:700;font-family:'Readex Pro'}
-.marker-cluster{background:rgba(31,107,69,.3)!important}
+.tree-mk{filter:drop-shadow(0 3px 3px rgba(20,48,31,.35));transition:transform .15s}
+.tree-mk:hover{transform:scale(1.12)}
+.grove{position:relative;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 3px 4px rgba(20,48,31,.35))}
+.grove b{position:absolute;top:-6px;left:50%;transform:translateX(-50%);background:var(--forest);color:#fff;border:2px solid #fff;border-radius:999px;font:700 11px 'Readex Pro';padding:1px 7px;white-space:nowrap}
+.quiz-opt{width:100%;min-height:52px;border-radius:14px;border:1.5px solid var(--line);background:#fff;text-align:right;padding:12px 14px;font-weight:600;line-height:1.5}
+.quiz-opt.ok{border-color:var(--green);background:var(--green-soft);color:var(--green)}
+.quiz-opt.bad{border-color:var(--clay);background:var(--clay-soft);color:var(--clay)}
+.idres{display:flex;align-items:center;gap:10px;border-radius:14px;padding:12px;margin-top:10px;font-size:13.5px}
 .month{height:48px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
 .month.on{background:var(--forest);color:#fff;border-color:var(--forest)}
 .dot{width:6px;height:6px;border-radius:50%}
@@ -158,8 +163,24 @@ const ICONS = {
   check:'<path d="M20 6 9 17l-5-5"/>',
   user:'<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
   logout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>',
-  mail:'<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>'
+  mail:'<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  scan:'<path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M12 8v8"/><path d="M8 12h8"/>',
+  scissors:'<circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/>',
+  medal:'<path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/>',
+  quiz:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
 };
+/* شجرة مرسومة لعلامات الخريطة */
+function treeSVG(size = 38, crown = '#2E7D52', crown2 = '#256B45') {
+  return `<svg width="${size}" height="${size * 1.15}" viewBox="0 0 40 46" aria-hidden="true">
+    <ellipse cx="20" cy="43" rx="9" ry="2.6" fill="rgba(20,48,31,.25)"/>
+    <path d="M18 30h4l1 13h-6z" fill="#7A5A33"/><path d="M20 34l-5-4M20 36l5-5" stroke="#7A5A33" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="13" cy="23" r="9" fill="${crown2}"/><circle cx="27" cy="23" r="9" fill="${crown2}"/>
+    <circle cx="20" cy="14" r="12" fill="${crown}"/><circle cx="20" cy="24" r="9" fill="${crown}"/>
+    <circle cx="15" cy="10" r="3.4" fill="#fff" opacity=".22"/><circle cx="24" cy="18" r="1.8" fill="#E9B949"/><circle cx="14" cy="22" r="1.6" fill="#E9B949"/>
+  </svg>`;
+}
+const METHOD = { seed:['بالبذور','sprout'], cutting:['بالعُقل','scissors'], grafting:['بالتطعيم','leaf'], layering:['بالترقيد','tree'], offshoot:['بالفسائل','tree'] };
 const ic = (n, s = 20, c = 'currentColor', w = 1.9) =>
   `<svg aria-hidden="true" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${ICONS[n] || ''}</svg>`;
 
@@ -186,7 +207,7 @@ function md(src) {
   }
   close(); return out;
 }
-const CAT = { rain:['المطر','var(--rain)','var(--rain-soft)','rain'], farm:['الزراعة','var(--green)','var(--green-soft)','sprout'], env:['البيئة','var(--gold-ink)','var(--gold-soft)','leaf'] };
+const CAT = { rain:['المطر','var(--rain)','var(--rain-soft)','rain'], farm:['الزراعة','var(--green)','var(--green-soft)','sprout'], env:['البيئة','var(--gold-ink)','var(--gold-soft)','leaf'], methods:['طرق الزراعة','var(--clay)','var(--clay-soft)','scissors'] };
 
 /* ===================== الحالة ===================== */
 const S = { user: null, profile: null, species: [], tab: 'home' };
@@ -331,9 +352,14 @@ ROUTES.home = { tab: 'home', auth: true, async render(v) {
     <span class="ibox" style="width:62px;height:62px;border-radius:16px;background:var(--rain-soft)">${ic('rain', 30, 'var(--rain)', 1.7)}</span>
     <span class="col" style="flex:1;gap:4px"><span class="small bold" style="color:var(--rain)">درس اليوم · ${fmt(a.read_minutes)} دقائق</span>
     <span class="disp" style="font-size:16px;font-weight:600;line-height:1.4">${esc(a.title)}</span></span>${ic('chevL', 20, 'var(--muted2)')}</button>` : ''}
+  <button class="card row" style="margin:12px 20px 0;width:calc(100% - 40px);text-align:right;background:var(--green-soft);border-color:#CFE6D7" onclick="go('identify')">
+    <span class="ibox" style="background:var(--green)">${ic('scan', 22, '#fff', 2)}</span>
+    <span class="col" style="flex:1"><span class="bold">تعرّف على شجرة</span><span class="small muted">صوّر أي شجرة لتعرف اسمها وطريقة زراعتها</span></span>${ic('chevL', 18, 'var(--green)')}</button>
   <div class="grid2" style="margin:12px 20px 0">
     <button class="card row" onclick="go('challenges')"><span class="ibox" style="background:var(--gold-soft)">${ic('target', 20, 'var(--gold-ink)')}</span><span class="bold">التحديات</span></button>
+    <button class="card row" onclick="go('competitions')"><span class="ibox" style="background:var(--clay-soft)">${ic('medal', 20, 'var(--clay)')}</span><span class="bold">المسابقات</span></button>
     <button class="card row" onclick="go('leaderboard')"><span class="ibox" style="background:var(--violet-soft)">${ic('trophy', 20, 'var(--violet)')}</span><span class="bold">المتصدرون</span></button>
+    <button class="card row" onclick="go('quizzes')"><span class="ibox" style="background:var(--rain-soft)">${ic('quiz', 20, 'var(--rain)')}</span><span class="bold">اختبارات</span></button>
   </div>
   <div class="section between"><h2 style="font-size:17px">أشجار تناسب السودان</h2><button onclick="go('species')" style="background:none;border:0;color:var(--green);font-weight:700;font-size:13px;min-height:44px">عرض الكل</button></div>
   <div class="chips">${S.species.slice(0, 4).map(sp => `
@@ -356,7 +382,7 @@ ROUTES.articles = { tab: 'articles', async render(v) {
       <span class="small bold" style="color:#235580">مقال مميز · ${fmt(feat.read_minutes)} دقائق</span>
       <span class="disp" style="display:block;margin-top:6px;font-size:19px;font-weight:700;line-height:1.45;max-width:260px">${esc(feat.title)}</span>
       <span class="row" style="gap:6px;margin-top:12px;font-size:13px;font-weight:700;color:#235580">اقرأ الآن ${ic('chevL', 16, '#235580', 2.2)}</span></button>` : ''}
-    <div class="chips" style="margin-top:14px">${[['all','الكل'],['rain','المطر'],['farm','الزراعة'],['env','البيئة']].map(([id, l]) =>
+    <div class="chips" style="margin-top:14px">${[['all','الكل'],['methods','طرق الزراعة'],['rain','المطر'],['farm','الزراعة'],['env','البيئة']].map(([id, l]) =>
       `<button class="chip ${f === id ? 'on' : ''}" data-f="${id}">${l}</button>`).join('')}</div>
     <div class="list" style="margin:12px 20px 0">${shown.map(a => { const c = CAT[a.category]; return `
       <button class="card row" style="text-align:right" onclick="go('article',{id:${a.id}})">
@@ -376,7 +402,11 @@ ROUTES.article = { tab: 'articles', async render(v, { id }) {
     <h1 style="font-size:25px;line-height:1.4;margin:12px 0 8px;color:var(--forest)">${esc(a.title)}</h1>
     ${md(a.body_md)}
     <button class="btn primary block" id="done" style="margin-top:20px">${ic('check', 18, '#fff', 2.2)} أنهيت القراءة</button>
+    <div id="qz"></div>
   </article>`;
+  sb.from('quizzes').select('id,title').eq('article_id', id).maybeSingle().then(({ data: q }) => {
+    if (q) $('#qz').innerHTML = `<button class="btn ghost block" style="margin-top:10px" onclick="go('quiz',{id:${q.id}})">${ic('quiz', 18, 'var(--rain)')} ${esc(q.title)}</button>`;
+  });
   if (S.user) {
     const { data: r } = await sb.from('article_reads').select('article_id').eq('article_id', id).maybeSingle();
     if (r) { $('#done').disabled = true; $('#done').textContent = 'قرأت هذا المقال'; }
@@ -399,7 +429,9 @@ ROUTES.species = { async render(v) {
       return `<div class="card row">
         <span class="ibox" style="width:52px;height:52px;border-radius:15px;background:${tone[0]}">${ic('tree', 24, tone[1], 1.8)}</span>
         <span class="col" style="flex:1;gap:3px"><span class="bold">${esc(s.name_ar)}</span><span class="small muted" style="line-height:1.5">${esc(s.note_ar)}</span>
-        <span class="row" style="gap:6px"><span class="pill" style="background:var(--rain-soft);color:var(--rain);font-size:11px;padding:2px 8px">ماء: ${esc(s.water_need)}</span></span></span>
+        <span class="row" style="gap:6px;flex-wrap:wrap"><span class="pill" style="background:var(--rain-soft);color:var(--rain);font-size:11px;padding:2px 8px">ماء: ${esc(s.water_need)}</span>
+        ${(s.methods || []).map(m => `<span class="pill" style="background:var(--clay-soft);color:var(--clay);font-size:11px;padding:2px 8px">${METHOD[m] ? METHOD[m][0] : ''}</span>`).join('')}</span>
+        ${s.planting_tip ? `<span class="small" style="color:#3F5547;line-height:1.6;margin-top:2px">${esc(s.planting_tip)}</span>` : ''}</span>
         <button class="ibtn" style="background:var(--green);border:0" aria-label="ازرع ${esc(s.name_ar)}" onclick="go('addtree',{species:${s.id}})">${ic('plus', 20, '#fff', 2.2)}</button></div>`;
     }).join('') || '<p class="empty">لا نتائج.</p>';
     v.querySelectorAll('[data-f]').forEach(b => b.classList.toggle('on', b.dataset.f === f));
@@ -409,6 +441,7 @@ ROUTES.species = { async render(v) {
     ${ic('search', 18, 'var(--muted2)', 2)}<label for="sq" class="sr">بحث</label>
     <input id="sq" placeholder="ابحث عن شجرة…" style="flex:1;border:0;outline:0;background:transparent"></div>
   <div class="chips" style="margin-top:12px">${[['all','الكل'],['shade','ظل'],['dry','تتحمل الجفاف'],['fruit','مثمرة']].map(([id, l]) => `<button class="chip" data-f="${id}">${l}</button>`).join('')}</div>
+  <button class="card row" style="margin:12px 20px 0;width:calc(100% - 40px);text-align:right" onclick="go('identify')">${ic('scan', 20, 'var(--green)', 2)}<span class="bold" style="flex:1">لا تعرف اسم الشجرة؟ صوّرها</span>${ic('chevL', 18, 'var(--muted2)')}</button>
   <div class="list" id="splist" style="margin:14px 20px 0"></div>`;
   v.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { f = b.dataset.f; draw(); });
   $('#sq').oninput = e => { q = e.target.value.trim(); draw(); };
@@ -446,12 +479,65 @@ async function pickPhoto() {
     inp.onchange = () => res(inp.files[0] || null); inp.click();
   });
 }
+async function identifyTree(blob) {
+  const { data: { session } } = await sb.auth.getSession();
+  const fd = new FormData(); fd.append('image', blob, 'tree.jpg');
+  const r = await fetch(`${SUPABASE_URL}/functions/v1/identify-tree`, {
+    method: 'POST', body: fd,
+    headers: { Authorization: `Bearer ${session ? session.access_token : SUPABASE_KEY}`, apikey: SUPABASE_KEY }
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || 'failed');
+  return j;
+}
+function idResultHTML(res) {
+  if (res.species_id) return `<div class="idres" style="background:var(--green-soft);color:var(--green)">${ic('check', 20, 'var(--green)', 2.4)}
+    <span class="col"><span class="bold">هذه ${esc(res.name_ar)} على الأرجح (${fmt(res.score)}٪)</span><span class="small">اخترناها لك في نوع الشجرة</span></span></div>`;
+  const top = (res.matches || [])[0];
+  if (top) return `<div class="idres" style="background:var(--gold-soft);color:var(--gold-ink)">${ic('leaf', 20, 'var(--gold-ink)')}
+    <span class="col"><span class="bold">تبدو ${esc(top.common || top.scientific)} (${fmt(top.score)}٪)</span><span class="small">ليست ضمن دليلنا بعد، اختر أقرب نوع.</span></span></div>`;
+  return `<div class="idres" style="background:#EEEAE0;color:var(--muted)">لم نتعرّف عليها. جرّب صورة أقرب للأوراق أو الثمار.</div>`;
+}
+function idErrorText(e) {
+  return e.message === 'not_configured' ? 'خدمة التعرّف غير مفعّلة بعد.' : 'تعذّر التعرّف الآن، تحقق من الاتصال.';
+}
+
+ROUTES.identify = { auth: true, async render(v) {
+  await loadSpecies();
+  v.innerHTML = `${topBar('تعرّف على شجرة')}
+  <div style="padding:12px 20px 0">
+    <p class="muted" style="margin:0 0 14px;line-height:1.7">صوّر الأوراق أو الثمار أو الزهور عن قرب وفي ضوء جيد، وسنخبرك باسم الشجرة وطريقة زراعتها.</p>
+    <button type="button" class="photo-pick" id="ph" style="height:220px">${ic('scan', 36, 'var(--green)', 1.6)}<span class="bold">التقط صورة أو اختر من المعرض</span></button>
+    <div id="res"></div>
+  </div>`;
+  $('#ph').onclick = async () => {
+    let b; try { b = await pickPhoto(); } catch (e) { return; }
+    if (!b) return;
+    $('#ph').innerHTML = `<img alt="الصورة المختارة" src="${URL.createObjectURL(b)}">`;
+    $('#res').innerHTML = loading();
+    try {
+      const res = await identifyTree(b);
+      const sp = S.species.find(s => s.id === res.species_id);
+      $('#res').innerHTML = idResultHTML(res) + (sp ? `
+        <div class="card" style="margin-top:12px">
+          <div class="row"><span class="ibox" style="background:var(--green-soft)">${ic('tree', 22, 'var(--green)')}</span>
+          <span class="col" style="flex:1"><span class="bold" style="font-size:16px">${esc(sp.name_ar)}</span><span class="small muted" dir="ltr" style="text-align:right">${esc(sp.scientific_name || '')}</span></span></div>
+          <p style="line-height:1.7;margin:10px 0 6px">${esc(sp.note_ar)}</p>
+          <div class="row" style="gap:6px;flex-wrap:wrap">${(sp.methods || []).map(m => `<span class="pill" style="background:var(--clay-soft);color:var(--clay)">${ic(METHOD[m][1], 13, 'var(--clay)', 2)} ${METHOD[m][0]}</span>`).join('')}</div>
+          ${sp.planting_tip ? `<p class="small" style="line-height:1.7;margin:10px 0 0;color:#3F5547">${esc(sp.planting_tip)}</p>` : ''}
+          <button class="btn primary block" style="margin-top:12px" onclick="go('addtree',{species:${sp.id}})">${ic('sprout', 18, '#fff', 2)} ازرع ${esc(sp.name_ar)}</button>
+        </div>` : '') + ((res.matches || []).length > 1 ? `<p class="small muted" style="margin-top:12px">احتمالات أخرى: ${res.matches.slice(1, 4).map(m => esc(m.name_ar || m.common || m.scientific) + ' ' + fmt(m.score) + '٪').join('، ')}</p>` : '');
+    } catch (e) { $('#res').innerHTML = `<div class="idres" style="background:var(--clay-soft);color:var(--clay)">${idErrorText(e)}</div>`; }
+  };
+}};
+
 ROUTES.addtree = { auth: true, async render(v, params) {
   await loadSpecies();
   const st = { pos: null, photo: null, species: params.species || (S.species[0] || {}).id };
   v.innerHTML = `${topBar('شجرة جديدة')}
   <form id="tf" style="padding:12px 20px 0">
     <button type="button" class="photo-pick" id="ph">${ic('camera', 30, 'var(--muted2)', 1.6)}<span class="bold">أضف صورة للشجرة</span><span class="small">الصورة توثّق غرسك وتمنحك نقاط تحدي التصوير</span></button>
+    <div id="idr"></div>
     <div class="field" style="margin-top:16px"><label for="sp">نوع الشجرة</label>
       <select class="input" id="sp">${S.species.map(s => `<option value="${s.id}" ${s.id == st.species ? 'selected' : ''}>${esc(s.name_ar)}</option>`).join('')}</select></div>
     <div class="field"><label for="nk">اسم مميز (اختياري)</label><input class="input" id="nk" maxlength="30" placeholder="مثال: نيم الحوش"></div>
@@ -465,8 +551,14 @@ ROUTES.addtree = { auth: true, async render(v, params) {
     <button class="btn primary block" id="save" type="submit">${ic('sprout', 18, '#fff', 2)} سجّل الشجرة</button>
   </form>`;
   $('#ph').onclick = async () => {
-    try { const b = await pickPhoto(); if (!b) return; st.photo = b; $('#ph').innerHTML = `<img alt="صورة الشجرة" src="${URL.createObjectURL(b)}">`; }
-    catch (e) { /* أُلغي */ }
+    let b; try { b = await pickPhoto(); } catch (e) { return; }
+    if (!b) return; st.photo = b; $('#ph').innerHTML = `<img alt="صورة الشجرة" src="${URL.createObjectURL(b)}">`;
+    $('#idr').innerHTML = `<div class="idres" style="background:#EEEAE0;color:var(--muted)">${ic('scan', 18, 'var(--muted2)', 2)} نتعرّف على الشجرة…</div>`;
+    try {
+      const res = await identifyTree(b);
+      $('#idr').innerHTML = idResultHTML(res);
+      if (res.species_id) $('#sp').value = res.species_id;
+    } catch (e) { $('#idr').innerHTML = `<div class="idres" style="background:#EEEAE0;color:var(--muted)">${idErrorText(e)} اختر النوع يدويًا.</div>`; }
   };
   $('#loc').onclick = async () => {
     const info = $('#locinfo'); info.textContent = 'جارٍ تحديد الموقع…';
@@ -568,8 +660,17 @@ ROUTES.map = { tab: 'map', full: true, async render(v) {
   if (mapObj) { mapObj.remove(); mapObj = null; }
   mapObj = L.map('map', { zoomControl: false, attributionControl: true }).setView([15.6, 30.2], 5);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(mapObj);
-  const pinIcon = L.divIcon({ className: '', html: '<div class="tree-pin"></div>', iconSize: [30, 30], iconAnchor: [15, 30] });
-  const cluster = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 50 });
+  const pinIcon = L.divIcon({ className: 'tree-mk', html: treeSVG(38), iconSize: [38, 44], iconAnchor: [19, 42], popupAnchor: [0, -38] });
+  const cluster = L.markerClusterGroup({
+    showCoverageOnHover: false, maxClusterRadius: 55,
+    iconCreateFunction: c => {
+      const n = c.getChildCount(), s = n < 10 ? 46 : n < 100 ? 54 : 62;
+      return L.divIcon({ className: '', iconSize: [s + 20, s], iconAnchor: [(s + 20) / 2, s - 4],
+        html: `<div class="grove" style="width:${s + 20}px;height:${s}px">
+          <span style="margin-left:-14px">${treeSVG(s * .6, '#3A8F60', '#2E7D52')}</span>${treeSVG(s * .78)}<span style="margin-right:-14px">${treeSVG(s * .6, '#3A8F60', '#2E7D52')}</span>
+          <b>${fmt(n)}</b></div>` });
+    }
+  });
   mapObj.addLayer(cluster);
 
   const [{ data: pts }, { data: states }, { data: cities }] = await Promise.all([
@@ -688,13 +789,117 @@ ROUTES.leaderboard = { async render(v) {
   };
   v.innerHTML = `<div class="lb-head">
     <div class="row"><button class="ibtn" style="background:var(--forest2);border:0" aria-label="رجوع" onclick="back()">${ic('back', 20, 'var(--sand)', 2)}</button>
-    <h1 style="flex:1;font-size:22px">لوحة المتصدرين</h1></div>
+    <h1 style="flex:1;font-size:22px">لوحة المتصدرين</h1>
+    <button class="btn" style="height:40px;background:var(--forest2);color:#F3D27C;font-size:13px" onclick="go('competitions')">${ic('medal', 16, '#F3D27C', 2)} المسابقات</button></div>
     <div class="seg" style="margin-top:14px"><button data-t="people">الأفراد</button><button data-t="cities">المدن</button><button data-t="states">الولايات</button></div>
     <div id="pod" class="row" style="margin-top:18px;justify-content:center;align-items:flex-end;gap:14px"></div></div>
   <div id="mine"></div>
   <ol id="rest" class="list" style="list-style:none;margin:12px 20px 0;padding:0"></ol>`;
   v.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { t = b.dataset.t; draw(); });
   draw();
+}};
+
+/* ===================== الاختبارات ===================== */
+ROUTES.quizzes = { auth: true, async render(v) {
+  const [{ data: qs }, { data: done }] = await Promise.all([
+    sb.from('quizzes').select('id,title,quiz_questions(count)').order('id'),
+    sb.from('quiz_attempts').select('quiz_id,score,total').eq('user_id', S.user.id)
+  ]);
+  const D = Object.fromEntries((done || []).map(d => [d.quiz_id, d]));
+  v.innerHTML = `${topBar('اختبارات')}
+  <p class="muted" style="margin:6px 20px 14px;line-height:1.7">كل إجابة صحيحة تمنحك 5 نقاط. يُحتسب أول محاولة فقط.</p>
+  <div class="list" style="margin:0 20px">${(qs || []).map(q => { const d = D[q.id], n = (q.quiz_questions[0] || {}).count || 0; return `
+    <button class="card row" style="text-align:right" onclick="go('quiz',{id:${q.id}})">
+      <span class="ibox" style="background:${d ? 'var(--green-soft)' : 'var(--rain-soft)'}">${ic(d ? 'check' : 'quiz', 20, d ? 'var(--green)' : 'var(--rain)', 2)}</span>
+      <span class="col" style="flex:1"><span class="bold">${esc(q.title)}</span><span class="small muted">${fmt(n)} أسئلة${d ? ' · نتيجتك ' + fmt(d.score) + '/' + fmt(d.total) : ''}</span></span>${ic('chevL', 18, 'var(--muted2)')}</button>`; }).join('')}</div>`;
+}};
+ROUTES.quiz = { auth: true, async render(v, { id }) {
+  const [{ data: q }, { data: qs }, { data: prev }] = await Promise.all([
+    sb.from('quizzes').select('*').eq('id', id).single(),
+    sb.from('quiz_questions').select('*').eq('quiz_id', id).order('id'),
+    sb.from('quiz_attempts').select('*').eq('quiz_id', id).eq('user_id', S.user.id).maybeSingle()
+  ]);
+  let i = 0, score = 0, answered = false;
+  const draw = () => {
+    if (i >= qs.length) {
+      v.innerHTML = `${topBar(esc(q.title))}<div class="empty" style="padding-top:40px">
+        <span class="ibox" style="background:var(--gold-soft);width:72px;height:72px;border-radius:22px">${ic('award', 36, 'var(--gold-ink)')}</span>
+        <h2 class="disp" style="font-size:24px;color:var(--forest)">${fmt(score)} من ${fmt(qs.length)}</h2>
+        <p>${score === qs.length ? 'ممتاز! أجبت عن كل الأسئلة.' : 'أحسنت، راجع المقال لتتقن الباقي.'}</p>
+        <p class="bold" style="color:var(--green)">${prev ? 'سُجّلت نتيجتك الأولى من قبل' : '+' + fmt(score * 5) + ' نقطة'}</p>
+        <button class="btn primary" onclick="back()">رجوع</button></div>`;
+      if (!prev) sb.from('quiz_attempts').insert({ user_id: S.user.id, quiz_id: id, score, total: qs.length }).then(() => {});
+      return;
+    }
+    const x = qs[i]; answered = false;
+    v.innerHTML = `${topBar(esc(q.title))}
+    <div style="padding:8px 20px 0">
+      <div class="row" style="gap:10px"><span class="small muted">سؤال ${fmt(i + 1)} من ${fmt(qs.length)}</span><div class="bar"><i style="width:${Math.round(100 * i / qs.length)}%"></i></div></div>
+      <h2 class="disp" style="font-size:20px;line-height:1.5;margin:18px 0;color:var(--forest)">${esc(x.prompt)}</h2>
+      <div class="list" id="opts">${x.options.map((o, k) => `<button class="quiz-opt" data-k="${k}">${esc(o)}</button>`).join('')}</div>
+      <div id="exp"></div>
+    </div>`;
+    v.querySelectorAll('[data-k]').forEach(b => b.onclick = () => {
+      if (answered) return; answered = true;
+      const k = +b.dataset.k, ok = k === x.correct; if (ok) score++;
+      haptic();
+      v.querySelectorAll('[data-k]').forEach(o => { const kk = +o.dataset.k; if (kk === x.correct) o.classList.add('ok'); else if (kk === k) o.classList.add('bad'); });
+      $('#exp').innerHTML = `<div class="card" style="margin-top:14px;background:${ok ? 'var(--green-soft)' : 'var(--clay-soft)'};border:0">
+        <span class="bold" style="color:${ok ? 'var(--green)' : 'var(--clay)'}">${ok ? 'إجابة صحيحة' : 'ليست هذه'}</span>
+        <p style="margin:6px 0 0;line-height:1.7">${esc(x.explain || '')}</p></div>
+        <button class="btn primary block" style="margin-top:14px" id="nx">${i + 1 < qs.length ? 'السؤال التالي' : 'النتيجة'}</button>`;
+      $('#nx').onclick = () => { i++; draw(); };
+    });
+  };
+  draw();
+}};
+
+/* ===================== المسابقات ===================== */
+function timeLeft(d) {
+  const ms = new Date(d) - Date.now(); if (ms <= 0) return 'انتهت';
+  const days = Math.floor(ms / 864e5); return days >= 1 ? 'تبقّى ' + fmt(days) + ' يوم' : 'تبقّى أقل من يوم';
+}
+const SCOPE = { people:['أفراد','user'], cities:['مدن','map'], states:['ولايات','map'] };
+ROUTES.competitions = { async render(v) {
+  const { data } = await sb.from('competitions').select('*').order('ends_at');
+  const now = Date.now();
+  const live = (data || []).filter(c => new Date(c.starts_at) <= now && new Date(c.ends_at) > now);
+  const past = (data || []).filter(c => new Date(c.ends_at) <= now);
+  const card = c => `<button class="card col gap10" style="text-align:right" onclick="go('competition',{id:${c.id}})">
+    <div class="row"><span class="ibox" style="background:var(--clay-soft)">${ic('medal', 20, 'var(--clay)')}</span>
+    <span class="col" style="flex:1"><span class="bold" style="font-size:15px">${esc(c.title)}</span><span class="small muted">${esc(c.description || '')}</span></span></div>
+    <div class="row" style="gap:6px;flex-wrap:wrap">
+      <span class="pill" style="background:var(--violet-soft);color:var(--violet)">${ic(SCOPE[c.scope][1], 13, 'var(--violet)', 2)} ${SCOPE[c.scope][0]}</span>
+      <span class="pill" style="background:var(--rain-soft);color:var(--rain)">${ic('clock', 13, 'var(--rain)', 2)} ${timeLeft(c.ends_at)}</span>
+      ${c.prize ? `<span class="pill" style="background:var(--gold-soft);color:var(--gold-ink)">${ic('trophy', 13, 'var(--gold-ink)', 2)} ${esc(c.prize)}</span>` : ''}</div></button>`;
+  v.innerHTML = `${topBar('المسابقات', `<button class="ibtn" aria-label="لوحة المتصدرين" onclick="go('leaderboard')">${ic('trophy', 20, 'var(--violet)')}</button>`)}
+  <p class="muted" style="margin:6px 20px 14px;line-height:1.7">كل شجرة تسجّلها خلال فترة المسابقة تُحسب لك ولمدينتك وولايتك.</p>
+  <div class="list" style="margin:0 20px">${live.map(card).join('') || '<p class="empty">لا توجد مسابقات جارية الآن.</p>'}</div>
+  ${past.length ? `<h2 class="section" style="font-size:16px">مسابقات منتهية</h2><div class="list" style="margin:0 20px">${past.map(card).join('')}</div>` : ''}`;
+}};
+ROUTES.competition = { async render(v, { id }) {
+  const [{ data: c }, { data: rows }] = await Promise.all([
+    sb.from('competitions').select('*').eq('id', id).single(),
+    sb.rpc('competition_ranking', { comp: id })
+  ]);
+  const r = rows || [], max = Math.max(1, ...r.map(x => Number(x.trees)));
+  const mine = S.user && c.scope === 'people' ? r.find(x => x.key === S.user.id) : null;
+  const medal = ['#E9B949', '#C9CED3', '#D9A27A'];
+  v.innerHTML = `<div class="lb-head">
+    <div class="row"><button class="ibtn" style="background:var(--forest2);border:0" aria-label="رجوع" onclick="back()">${ic('back', 20, 'var(--sand)', 2)}</button>
+    <h1 style="flex:1;font-size:20px;line-height:1.4">${esc(c.title)}</h1></div>
+    <p style="margin:10px 0 0;color:#C9D8CE;line-height:1.7">${esc(c.description || '')}</p>
+    <div class="row" style="gap:6px;flex-wrap:wrap;margin-top:10px">
+      <span class="pill" style="background:var(--forest2);color:#CDEBD8">${ic('clock', 13, '#CDEBD8', 2)} ${timeLeft(c.ends_at)}</span>
+      ${c.prize ? `<span class="pill" style="background:var(--gold);color:var(--forest)">${ic('trophy', 13, 'var(--forest)', 2)} ${esc(c.prize)}</span>` : ''}</div></div>
+  ${mine ? `<div class="row" style="margin:12px 20px 0;height:56px;border-radius:16px;background:var(--green);color:#fff;padding:0 14px"><span class="bold">ترتيبك: ${fmt(mine.rank)}</span><span style="flex:1"></span><span class="bold">${fmt(mine.trees)} شجرة</span></div>` : ''}
+  <ol class="list" style="list-style:none;margin:12px 20px 0;padding:0">${r.map((x, i) => `
+    <li class="card col" style="gap:8px;padding:12px 14px">
+      <div class="row"><span class="avatar disp" style="width:34px;height:34px;font-size:15px;background:${i < 3 ? medal[i] : 'var(--green-soft)'};color:${i < 3 ? 'var(--forest)' : 'var(--green)'}">${fmt(x.rank)}</span>
+      <span class="col" style="flex:1"><span class="bold">${esc(x.label)}</span>${x.sub ? `<span class="small muted">${esc(x.sub)}</span>` : ''}</span>
+      <span class="bold">${fmt(x.trees)}</span></div>
+      <div class="bar"><i style="width:${Math.round(100 * x.trees / max)}%;background:${i < 3 ? medal[i] : 'var(--green)'}"></i></div></li>`).join('') ||
+    `<div class="empty"><span class="ibox" style="background:var(--green-soft)">${ic('sprout', 28, 'var(--green)')}</span><p>لم يُسجّل أحد شجرة بعد. كن الأول!</p><button class="btn primary" onclick="go('addtree')">سجّل شجرة</button></div>`}</ol>`;
 }};
 
 /* ===================== تقويم الزراعة ===================== */
